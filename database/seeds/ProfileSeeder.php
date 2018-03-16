@@ -1,5 +1,6 @@
 <?php
 
+use App\Profile;
 use Illuminate\Database\Seeder;
 
 class ProfileSeeder extends Seeder
@@ -11,6 +12,7 @@ class ProfileSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // factory(Profile::class)->create();
     }
+
 }

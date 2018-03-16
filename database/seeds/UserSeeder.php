@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
-
 use App\User;
+use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
@@ -16,6 +15,15 @@ class UserSeeder extends Seeder
         $user = factory(User::class)->create();
         $user->email = 't@e.st';
         $user->save();
+
+        $user = factory(User::class)->create();
+        $user->email = 'ad@m.in';
+        $user->is_administrator = true;
+        $user->save();
+
+        for ($i=0; $i<3; $i++) {
+            factory(User::class)->create();
+        }
     }
 
 }

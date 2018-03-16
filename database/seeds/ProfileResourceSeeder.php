@@ -1,9 +1,9 @@
 <?php
 
-use App\Circle;
+use App\ProfileResource;
 use Illuminate\Database\Seeder;
 
-class CircleSeeder extends Seeder
+class ProfileResourceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,9 +12,8 @@ class CircleSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i<5; $i++) {
-            factory(Circle::class)->create();
+        for ($i=0; $i<50; $i++) {
+            factory(ProfileResource::class)->create();
         }
     }
-
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EventResources extends Migration
+class ProfileResources extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class EventResources extends Migration
      */
     public function up()
     {
-        Schema::create('event_resources', function (Blueprint $table) {
+        Schema::create('profile_resources', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
@@ -31,7 +31,6 @@ class EventResources extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_resources');
+        Schema::dropIfExists('profile_resources');
     }
-
 }

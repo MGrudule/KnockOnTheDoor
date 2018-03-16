@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CircleSeeder::class);
         $this->call(ProfileSeeder::class);
         $this->call(ResourceSeeder::class);
+        $this->call(ProfileResourceSeeder::class);
     }
 }
