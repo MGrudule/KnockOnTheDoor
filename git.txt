@@ -1,0 +1,38 @@
+______master_____________________________________
+\             \________develop__________/________
+ \__feature____/    \___feature___/
+
+----------------------------------------------
+Policy:
+
+http://reinh.com/blog/2009/03/02/a-git-workflow-for-agile-teams.html
+
+* master branch on origin
+* local feature branches
+* rebase feature branches during development to get changes on master
+* squash commit completed feature branch
+
+Workflow
+1. Pull to update your local master
+2. Check out a feature branch
+3. Do work in your feature branch, committing early and often
+4. Rebase frequently to incorporate upstream changes
+5. Interactive rebase (squash) your commits
+6. Merge your changes with master
+7. Push your changes to the upstream
+
+----------------------------------------------
+Create branch:
+git checkout -b myfeature
+
+Rebase against the upstream frequently to prevent your branch from diverging significantly:
+git fetch origin master
+git rebase origin/master
+
+Interactivly rebase:
+git rebase -i origin/master
+
+Merge with master and push to origin:
+git checkout master
+git merge myfeature
+git push origin master
