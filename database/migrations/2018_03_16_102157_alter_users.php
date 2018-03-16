@@ -14,7 +14,7 @@ class AlterUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('summary')->default("")->after('is_administrator');
+            $table->text('summary')->nullable()->after('is_administrator');
 
             $table->integer('profile_id')->unsigned()->nullable()->after('summary');
             $table->foreign('profile_id')->references('id')->on('profiles');
