@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Resource;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class ResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        //
     }
 
     /**
@@ -41,10 +41,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Resource $resource)
     {
         //
     }
@@ -52,10 +52,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Resource $resource)
     {
         //
     }
@@ -64,10 +64,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Resource $resource)
     {
         //
     }
@@ -75,21 +75,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Resource  $resource
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Resource $resource)
     {
         //
     }
-
-    public function profile(Request $request)
-    {
-        $user = $request->user();
-        $user->circle = $user->circle();
-        $user->profile = $user->profile();
-        $user->resources = $user->resources();
-        return $user;
-    }
-
 }

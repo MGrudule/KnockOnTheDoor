@@ -14,7 +14,7 @@ class UserFlags extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_administrator')->after('remember_token')->default(false);
+            $table->boolean('is_administrator')->after('api_token')->default(false);
         });
     }
 
