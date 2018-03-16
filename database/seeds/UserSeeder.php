@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     {
         $user = factory(User::class)->create();
         $user->email = 't@e.st';
+        $user->summary = '';
         $user->save();
     }
 
