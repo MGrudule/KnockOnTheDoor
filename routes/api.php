@@ -25,6 +25,6 @@ Route::post('login', 'Auth\LoginController@login');
 // Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
 Route::group(['middleware' => 'auth:api'], function () {
     // Route::resource('users', 'UserController');
-    Route::get('users', 'UserController@index');
+    Route::get('users', 'UserController@profiles');
     Route::get('user', 'UserController@profile');
 });

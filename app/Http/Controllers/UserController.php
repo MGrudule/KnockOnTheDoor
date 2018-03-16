@@ -86,6 +86,20 @@ class UserController extends Controller
     public function profile(Request $request)
     {
         $user = $request->user();
+        return $this->loadUser($user);
+    }
+
+    public function profiles()
+    {
+        $users = [];
+        foreach (User::all() as $user) {
+            array_push($users, $this->loadUser($user));
+        }
+        return $users;
+    }
+
+    private function loadUser($user)
+    {
         $user->circle = $user->circle();
         $user->profile = $user->profile();
         $user->resources = $user->resources();
