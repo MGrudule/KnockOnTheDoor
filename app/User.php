@@ -42,19 +42,19 @@ class User extends Authenticatable
         return $this->api_token;
     }
 
-    public function circle()
+    public function circles()
     {
-        return $this->hasOne(Circle::class);
+        return $this->belongsToMany(Circle::class, 'user_circles');
     }
 
     public function profile()
     {
-        return $this->hasOne(Profile::class);
+        return $this->belongsTo(Profile::class);
     }
 
     public function resources()
     {
-        return $this->hasMany(Resource::class);
+        return $this->belongsToMany(Resource::class, 'profile_resources');
     }
 
 }

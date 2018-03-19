@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\UserCircle;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserCircleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        //
     }
 
     /**
@@ -41,10 +41,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\UserCircle  $userCircle
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(UserCircle $userCircle)
     {
         //
     }
@@ -52,10 +52,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\UserCircle  $userCircle
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(UserCircle $userCircle)
     {
         //
     }
@@ -64,10 +64,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\UserCircle  $userCircle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, UserCircle $userCircle)
     {
         //
     }
@@ -75,34 +75,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\UserCircle  $userCircle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(UserCircle $userCircle)
     {
         //
     }
-
-    public function profile(Request $request)
-    {
-        $user = $request->user();
-        return $this->loadUser($user);
-    }
-
-    public function profiles()
-    {
-        $users = [];
-        foreach (User::all() as $user) {
-            array_push($users, $this->loadUser($user));
-        }
-        return $users;
-    }
-
-    private function loadUser($user)
-    {
-        $user->circle = $user->circles()->get()->first();
-        $user->resources = $user->resources()->get();
-        return $user;
-    }
-
 }
