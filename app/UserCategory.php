@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserResourceQualifier extends Model
+class UserCategory extends Model
 {
     //
 }

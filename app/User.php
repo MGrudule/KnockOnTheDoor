@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Category;
 use App\Circle;
 use App\Profile;
 use App\Resource;
@@ -19,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'summary'
     ];
 
     /**
@@ -42,19 +43,42 @@ class User extends Authenticatable
         return $this->api_token;
     }
 
-    public function circles()
+    public function circle()
     {
-        return $this->belongsToMany(Circle::class, 'user_circles');
-    }
-
-    public function profile()
-    {
-        return $this->belongsTo(Profile::class);
+        return $this->belongsTo(Circle::class);
     }
 
     public function resources()
     {
-        return $this->belongsToMany(Resource::class, 'profile_resources');
+        return $this->belongsToMany(Resource::class, 'user_resources')->
+            withPivot('category_id');
+    }
+
+    public function resources1()
+    {
+        return $this->belongsToMany(Resource::class, 'user_resource1s');
+    }
+
+    public function resources2()
+    {
+        return $this->belongsToMany(Resource::class, 'user_resource2s');
+    }
+
+    public function resources3()
+    {
+        return $this->belongsToMany(Resource::class, 'user_resource3s');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'user_categories');
+    }
+
+    public function resource_categories()
+    {
+        return $this->belongsToMany(
+            UserResourceCategory::class, 'user_resources', 'user_id', 'category_id')->
+            withPivot('resource_id');
     }
 
 }
