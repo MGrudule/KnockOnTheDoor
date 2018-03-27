@@ -17,10 +17,13 @@ class ProfileResources extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('qualifier')->nullable();
+            $table->integer('qualifier_id')->unsigned();
+            $table->foreign('qualifier_id')->references('id')->on('profile_resource_qualifiers');
             $table->integer('resource_id')->unsigned();
             $table->foreign('resource_id')->references('id')->on('resources');
             $table->timestamps();
+
+            $table->unique(['user_id','qualifier_id','resource_id']);
         });
     }
 
@@ -33,4 +36,5 @@ class ProfileResources extends Migration
     {
         Schema::dropIfExists('profile_resources');
     }
+
 }
