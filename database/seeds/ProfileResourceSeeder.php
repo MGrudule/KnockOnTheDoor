@@ -13,7 +13,14 @@ class ProfileResourceSeeder extends Seeder
     public function run()
     {
         for ($i=0; $i<50; $i++) {
-            factory(ProfileResource::class)->create();
+            try {
+                factory(ProfileResource::class)->create();
+            } catch (PDOException $e) {
+                // ignore unique key contraint exceptions
+                if ($e->errorInfo[1] != 1062) {
+                    throw $e;
+                }
+            }
         }
     }
 }
