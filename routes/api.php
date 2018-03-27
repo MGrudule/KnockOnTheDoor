@@ -22,9 +22,26 @@ use Illuminate\Http\Request;
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
 
+use App\Circle;
+use App\User;
+use App\Http\Resources\CircleResource;
+use App\Http\Resources\UserResource;
+
 // Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
 Route::group(['middleware' => 'auth:api'], function () {
     // Route::resource('users', 'UserController');
-    Route::get('users', 'UserController@profiles');
-    Route::get('user', 'UserController@profile');
+    // Route::get('users', 'UserController@profiles');
+    // Route::get('user', 'UserController@profile');
+
+    Route::get('user', function () {
+        return new UserResource(User::find(1));
+    });
+
+    Route::get('users', function () {
+        return UserResource::collection(User::all());
+    });
+
+    Route::get('circles', function () {
+        return CircleResource::collection(User::all());
+    });
 });
