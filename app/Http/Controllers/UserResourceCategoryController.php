@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\UserResourceQualifier;
+use App\UserResourceCategory;
 use Illuminate\Http\Request;
 
-class UserResourceQualifierController extends Controller
+class UserResourceCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class UserResourceQualifierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\UserResourceQualifier  $userResourceQualifier
+     * @param  \App\UserResourceCategory  $userResourceCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(UserResourceQualifier $userResourceQualifier)
+    public function show(UserResourceCategory $userResourceCategory)
     {
         //
     }
@@ -52,10 +52,10 @@ class UserResourceQualifierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UserResourceQualifier  $userResourceQualifier
+     * @param  \App\UserResourceCategory  $userResourceCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserResourceQualifier $userResourceQualifier)
+    public function edit(UserResourceCategory $userResourceCategory)
     {
         //
     }
@@ -64,10 +64,10 @@ class UserResourceQualifierController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserResourceQualifier  $userResourceQualifier
+     * @param  \App\UserResourceCategory  $userResourceCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserResourceQualifier $userResourceQualifier)
+    public function update(Request $request, UserResourceCategory $userResourceCategory)
     {
         //
     }
@@ -75,10 +75,10 @@ class UserResourceQualifierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UserResourceQualifier  $userResourceQualifier
+     * @param  \App\UserResourceCategory  $userResourceCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserResourceQualifier $userResourceQualifier)
+    public function destroy(UserResourceCategory $userResourceCategory)
     {
         //
     }
