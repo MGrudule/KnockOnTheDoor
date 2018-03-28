@@ -20,4 +20,5 @@ class Resource extends Model
             UserResourceCategory::class, 'user_resources', 'resource_id', 'category_id')->
             withPivot('user_id');
     }
+
 }
