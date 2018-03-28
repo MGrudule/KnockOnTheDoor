@@ -1,7 +1,7 @@
 <?php
 
+use App\Category;
 use App\Message;
-use App\Subject;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -14,15 +14,18 @@ class MessageSeeder extends Seeder
      */
     public function run()
     {
-        // create a message for every user, with a random subject
+        $factory = factory(Message::class);
         foreach (User::all() as $user) {
-            $subject = Subject::inRandomOrder()->first();
-            Message::create([
+            $message = $factory->create([
                 "user_id" => $user->id,
-                "subject_id" => $subject->id,
-                "body" => "Gardening",
             ]);
+            // add 1 to 3 random categories
+            $categories = Category::inRandomOrder()->
+                select('id')->
+                take(rand(1,3))->
+                get()->all();
+            $message->categories()->sync(array_column($categories, 'id'));
         }
-
     }
+
 }

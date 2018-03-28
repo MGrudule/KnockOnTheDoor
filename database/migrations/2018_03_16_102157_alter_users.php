@@ -16,10 +16,7 @@ class AlterUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->text('summary')->nullable()->after('is_administrator');
 
-            $table->integer('profile_id')->unsigned()->nullable()->after('summary');
-            $table->foreign('profile_id')->references('id')->on('profiles');
-
-            $table->integer('circle_id')->unsigned()->nullable()->after('profile_id');
+            $table->integer('circle_id')->unsigned()->nullable()->after('is_administrator');
             $table->foreign('circle_id')->references('id')->on('circles');
         });
     }
