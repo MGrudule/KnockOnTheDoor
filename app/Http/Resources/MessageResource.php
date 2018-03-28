@@ -20,7 +20,7 @@ class MessageResource extends JsonResource
             'user' => new UserResource($this->user),
             'subject' => new SubjectResource($this->subject),
             'categories' => CategoryResource::collection($this->categories),
-            'tags' => TagResource::collection($this->tags),
+            'tags' => array_column($this->tags->all(), 'tag'),
             'comment_count' => $this->comments->count(),
             'date' => $this->created_at,
         ];
