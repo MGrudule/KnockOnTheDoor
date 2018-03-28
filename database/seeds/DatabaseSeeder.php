@@ -27,5 +27,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(ProfileSeeder::class);
         // $this->call(ProfileResourceQualifierSeeder::class);
         // $this->call(ProfileResourceSeeder::class);
+
+        $this->call(SubjectSeeder::class);
+        $this->call(MessageSeeder::class);
     }
 }
