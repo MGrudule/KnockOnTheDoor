@@ -1,6 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Circle;
+use App\Message;
+use App\User;
+use App\Http\Resources\CircleResource;
+use App\Http\Resources\MessageResource;
+use App\Http\Resources\ProfileResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,35 +18,27 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('user', function (Request $request) {
-//     return $request->user();
-// });
-
-// Route::post('register', 'Auth\Api\RegisterController@register');
-// Route::post('login', 'Auth\Api\LoginController@login');
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
 
-use App\Circle;
-use App\User;
-use App\Http\Resources\CircleResource;
-use App\Http\Resources\UserResource;
-
-// Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
 Route::group(['middleware' => 'auth:api'], function () {
-    // Route::resource('users', 'UserController');
-    // Route::get('users', 'UserController@profiles');
-    // Route::get('user', 'UserController@profile');
-
-    Route::get('user', function () {
-        return new UserResource(User::find(1));
+    Route::get('profile', function () {
+        return new ProfileResource(Auth::user());
     });
 
-    Route::get('users', function () {
-        return UserResource::collection(User::all());
+    Route::get('profiles', function () {
+        return ProfileResource::collection(User::all());
     });
 
     Route::get('circles', function () {
-        return CircleResource::collection(User::all());
+        return CircleResource::collection(Circle::all());
+    });
+
+    Route::get('messages/{message}', function (Message $message) {
+        return new MessageResource($message);
+    });
+
+    Route::get('messages', function () {
+        return MessageResource::collection(Message::all());
     });
 });
