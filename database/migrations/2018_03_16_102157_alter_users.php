@@ -31,9 +31,6 @@ class AlterUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('summary');
 
-            $table->dropForeign('users_profile_id_foreign');
-            $table->dropColumn('profile_id');
-
             $table->dropForeign('users_circle_id_foreign');
             $table->dropColumn('circle_id');
         });

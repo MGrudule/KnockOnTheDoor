@@ -12,9 +12,6 @@ class ResourceSeeder extends Seeder
      */
     public function run()
     {
-        // for ($i=0; $i<5; $i++) {
-        //     factory(Resource::class)->create();
-        // }
         foreach ($this->resources as $title) {
             Resource::create(['title' => $title]);
         }
