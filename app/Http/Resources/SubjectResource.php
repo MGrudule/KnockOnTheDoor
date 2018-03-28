@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\UserResourceCategory;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResourceResource extends JsonResource
+class SubjectResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +15,8 @@ class UserResourceResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "name" => $this->name,
-            // "id" => $this->id,
-            // "title" => UserResourceCategory::find($this->category_id)->title,
-            // "names" => ResourceResource::collection($this->resources),
+            'id' => $this->id,
+            'name' => $this->name,
         ];
     }
 }

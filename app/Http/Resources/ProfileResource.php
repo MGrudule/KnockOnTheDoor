@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class ProfileResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -33,7 +33,7 @@ class UserResource extends JsonResource
                 'id' => 3,
                 'title' => "I'm interested in",
                 'names' => array_column($this->resources3->all(), 'title'),
-            ] ],
+            ],],
         ];
     }
 }
