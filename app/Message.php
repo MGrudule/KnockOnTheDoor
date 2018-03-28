@@ -18,7 +18,7 @@ class Message extends Model
 
     public function comments()
     {
-        return $this->belongsToMany(Comment::class, 'message_comments');
+        return $this->hasMany(Comment::class);
     }
 
     public function subject()
