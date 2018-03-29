@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\UserResourceCategory;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProfileResource extends JsonResource
@@ -14,6 +15,15 @@ class ProfileResource extends JsonResource
      */
     public function toArray($request)
     {
+        // group by category and take only resource names
+        $groupedResources = UserResourceCategory::select('id', 'title')->get()->all();
+        foreach ($groupedResources as $resourceGroup) {
+            $resources = $resourceGroup->resources()->
+                where(['user_id' => $this->id])->
+                get()->all();
+            $resourceGroup->names = array_column($resources, 'title');
+        }
+
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -21,19 +31,7 @@ class ProfileResource extends JsonResource
             'summary' => $this->summary,
             'circle' => new CircleResource($this->circle),
             'categories' => CategoryResource::collection($this->categories),
-            'resources' => [ [
-                'id' => 1,
-                'title' => "I have",
-                'names' => array_column($this->resources1->all(), 'title'),
-            ],[
-                'id' => 2,
-                'title' => "I can",
-                'names' => array_column($this->resources2->all(), 'title'),
-            ],[
-                'id' => 3,
-                'title' => "I'm interested in",
-                'names' => array_column($this->resources3->all(), 'title'),
-            ],],
+            'resources' => $groupedResources,
         ];
     }
 }

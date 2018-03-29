@@ -54,21 +54,6 @@ class User extends Authenticatable
             withPivot('category_id');
     }
 
-    public function resources1()
-    {
-        return $this->belongsToMany(Resource::class, 'user_resource1s');
-    }
-
-    public function resources2()
-    {
-        return $this->belongsToMany(Resource::class, 'user_resource2s');
-    }
-
-    public function resources3()
-    {
-        return $this->belongsToMany(Resource::class, 'user_resource3s');
-    }
-
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'user_categories');
