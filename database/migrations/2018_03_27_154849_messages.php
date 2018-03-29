@@ -22,6 +22,8 @@ class Messages extends Migration
             $table->integer('subject_id')->unsigned()->index();
             $table->foreign('subject_id')->references('id')->
                 on('subjects')->onDelete('cascade');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
