@@ -1,11 +1,8 @@
 <?php
 
-use App\Circle;
-use App\Message;
-use App\User;
-use App\Http\Resources\CircleResource;
-use App\Http\Resources\MessageResource;
-use App\Http\Resources\ProfileResource;
+use App\Http\Controllers\Resource\CircleController;
+use App\Http\Controllers\Resource\MessageController;
+use App\Http\Controllers\Resource\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,20 +22,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('current_profile', function () {
         return new ProfileResource(Auth::user());
     });
-
-    Route::get('profiles', function () {
-        return ProfileResource::collection(User::all());
-    });
-
-    Route::get('circles', function () {
-        return CircleResource::collection(Circle::all());
-    });
-
-    Route::get('messages/{message}', function (Message $message) {
-        return new MessageResource($message);
-    });
-
-    Route::get('messages', function () {
-        return MessageResource::collection(Message::all());
-    });
+    Route::resource('circles', 'Resource\CircleController');
+    Route::resource('messages', 'Resource\MessageController');
+    Route::resource('profiles', 'Resource\ProfileController');
 });
