@@ -17,13 +17,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ResourceSeeder::class);
         $this->call(UserResourceCategorySeeder::class);
-        $this->call(UserResource1Seeder::class);
-        $this->call(UserResource2Seeder::class);
-        $this->call(UserResource3Seeder::class);
+        $this->call(UserResourceSeeder::class);
 
         $this->call(SubjectSeeder::class);
         $this->call(TagSeeder::class);
         $this->call(MessageSeeder::class);
         $this->call(CommentSeeder::class);
     }
+
 }

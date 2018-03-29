@@ -14,18 +14,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = factory(User::class)->create();
-        $user->email = 't@e.st';
-        $user->save();
+        factory(User::class)->create([
+            'email' => 't@e.st'
+        ]);
 
-        $user = factory(User::class)->create();
-        $user->email = 'ad@m.in';
-        $user->is_administrator = true;
-        $user->save();
+        factory(User::class)->create([
+            'email' => 'ad@m.in',
+            'is_administrator' => true,
+        ]);
 
-        for ($i=0; $i<3; $i++) {
-            factory(User::class)->create();
-        }
+        factory(User::class, 3)->create();
 
         foreach (User::all() as $user) {
             // set circle
@@ -34,7 +32,7 @@ class UserSeeder extends Seeder
             // add 3 to 5 categories
             $categories = Category::inRandomOrder()->
                 select('id')->
-                take(rand(3,5))->
+                limit(rand(3,5))->
                 get()->all();
             $user->categories()->sync(array_column($categories, 'id'));
         }

@@ -12,9 +12,6 @@ class CommentSeeder extends Seeder
      */
     public function run()
     {
-        $factory = factory(Comment::class);
-        for ($i=0; $i<50; $i++) {
-            $factory->create();
-        }
+        factory(Comment::class, 50)->create();
     }
 }

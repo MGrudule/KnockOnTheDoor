@@ -13,7 +13,7 @@ class UserResourceCategorySeeder extends Seeder
     public function run()
     {
         UserResourceCategory::create(['title' => "I have"]);
-        UserResourceCategory::create(['title' => "I can help with"]);
+        UserResourceCategory::create(['title' => "I can"]);
         UserResourceCategory::create(['title' => "I'm interested in"]);
     }
 }
