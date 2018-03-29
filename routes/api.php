@@ -22,7 +22,7 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::get('profile', function () {
+    Route::get('current_profile', function () {
         return new ProfileResource(Auth::user());
     });
 
