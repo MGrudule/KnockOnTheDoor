@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\Circle;
+use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class CircleController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class CircleController extends Controller
      */
     public function index()
     {
-        //
+        return User::all();
     }
 
     /**
@@ -41,10 +42,10 @@ class CircleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Circle  $circle
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Circle $circle)
+    public function show(User $user)
     {
         //
     }
@@ -52,10 +53,10 @@ class CircleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Circle  $circle
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Circle $circle)
+    public function edit(User $user)
     {
         //
     }
@@ -64,10 +65,10 @@ class CircleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Circle  $circle
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Circle $circle)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -75,11 +76,12 @@ class CircleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Circle  $circle
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Circle $circle)
+    public function destroy(User $user)
     {
         //
     }
+
 }

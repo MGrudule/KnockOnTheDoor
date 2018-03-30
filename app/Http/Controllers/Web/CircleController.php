@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\ProfileResource;
+use App\Circle;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ProfileResourceController extends Controller
+class CircleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class ProfileResourceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProfileResource  $profileResource
+     * @param  \App\Circle  $circle
      * @return \Illuminate\Http\Response
      */
-    public function show(ProfileResource $profileResource)
+    public function show(Circle $circle)
     {
         //
     }
@@ -52,10 +53,10 @@ class ProfileResourceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProfileResource  $profileResource
+     * @param  \App\Circle  $circle
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProfileResource $profileResource)
+    public function edit(Circle $circle)
     {
         //
     }
@@ -64,10 +65,10 @@ class ProfileResourceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProfileResource  $profileResource
+     * @param  \App\Circle  $circle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProfileResource $profileResource)
+    public function update(Request $request, Circle $circle)
     {
         //
     }
@@ -75,10 +76,10 @@ class ProfileResourceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProfileResource  $profileResource
+     * @param  \App\Circle  $circle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProfileResource $profileResource)
+    public function destroy(Circle $circle)
     {
         //
     }

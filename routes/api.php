@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\Resource\CircleController;
-use App\Http\Controllers\Resource\MessageController;
-use App\Http\Controllers\Resource\ProfileController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,14 +11,18 @@ use App\Http\Controllers\Resource\ProfileController;
 |
 */
 
+use App\Http\Controllers\Resource\CircleController;
+use App\Http\Controllers\Resource\MessageController;
+use App\Http\Controllers\Resource\ProfileController;
+
 Route::post('register', 'Auth\RegisterController@register');
-Route::post('login', 'Auth\LoginController@login');
+Route::post('login',    'Auth\LoginController@login');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('current_profile', function () {
         return new ProfileResource(Auth::user());
     });
-    Route::resource('circles', 'Resource\CircleController');
-    Route::resource('messages', 'Resource\MessageController');
-    Route::resource('profiles', 'Resource\ProfileController');
+    Route::resource('circles',    'Resource\CircleController');
+    Route::resource('messages',   'Resource\MessageController');
+    Route::resource('profiles',   'Resource\ProfileController');
 });
