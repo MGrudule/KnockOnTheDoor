@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Resource;
+namespace App\Http\Controllers\Api;
 
 use App\Message;
-use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\ApiController;
 use App\Http\Resources\MessageResource;
 use Illuminate\Http\Request;
 
-class MessageController extends ResourceController
+class MessageController extends ApiController
 {
     /**
      * Display a listing of the resource.

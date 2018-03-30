@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Resource;
+namespace App\Http\Controllers\Api;
 
 use App\User;
-use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\ApiController;
 use App\Http\Resources\UserProfileResource;
 use Illuminate\Http\Request;
 
-class UserProfileController extends ResourceController
+class UserProfileController extends ApiController
 {
     /**
      * Display a listing of the resource.

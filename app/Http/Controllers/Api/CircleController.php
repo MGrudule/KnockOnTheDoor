@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Resource;
+namespace App\Http\Controllers\Api;
 
 use App\Circle;
-use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\ApiController;
 use App\Http\Resources\CircleResource;
 use Illuminate\Http\Request;
 
-class CircleController extends ResourceController
+class CircleController extends ApiController
 {
     /**
      * Display a listing of the resource.
