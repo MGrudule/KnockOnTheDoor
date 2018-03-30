@@ -13,3 +13,6 @@
 
 Auth::routes();
 Route::get('/', 'Web\HomeController@index')->name('home');
+Route::resource('/categories', 'Web\CategoryController');
+Route::resource('/circles', 'Web\CircleController');
+Route::resource('/users', 'Web\UserController');
