@@ -20,16 +20,6 @@ class UserProfileController extends ResourceController
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -51,15 +41,8 @@ class UserProfileController extends ResourceController
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
+    public function currentProfile() {
+        return new UserProfileResource(Auth::user());
     }
 
     /**
@@ -83,6 +66,7 @@ class UserProfileController extends ResourceController
     public function destroy(User $user)
     {
         $user->delete();
-        return "";
+        return response()->json();
     }
+
 }

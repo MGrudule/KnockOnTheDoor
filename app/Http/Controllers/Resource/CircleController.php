@@ -20,16 +20,6 @@ class CircleController extends ResourceController
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,17 +37,6 @@ class CircleController extends ResourceController
      * @return \Illuminate\Http\Response
      */
     public function show(Circle $circle)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Circle  $circle
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Circle $circle)
     {
         //
     }
@@ -83,6 +62,6 @@ class CircleController extends ResourceController
     public function destroy(Circle $circle)
     {
         $circle->delete();
-        return "";
+        return response()->json();
     }
 }
