@@ -23,16 +23,16 @@ class UserSeeder extends Seeder
             'is_administrator' => true,
         ]);
 
-        factory(User::class, 3)->create();
+        factory(User::class, 8)->create();
 
         foreach (User::all() as $user) {
             // set circle
             $user->circle_id = Circle::inRandomOrder()->first()->id;
 
-            // add 3 to 5 categories
+            // add 1 to 3 categories
             $categories = Category::inRandomOrder()->
                 select('id')->
-                limit(rand(3,5))->
+                limit(rand(1,3))->
                 get()->all();
             $user->categories()->sync(array_column($categories, 'id'));
         }
