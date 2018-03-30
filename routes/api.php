@@ -11,8 +11,8 @@
 |
 */
 
-Route::post('register', 'Auth\RegisterController@register');
-Route::post('login',    'Auth\LoginController@login');
+Route::post('login',    'Api\Auth\LoginController@login');
+Route::post('register', 'Api\Auth\RegisterController@register');
 
 Route::group(['middleware' => 'auth:api'], function () {
     $noViews    = ["except"=>['edit', 'create']];

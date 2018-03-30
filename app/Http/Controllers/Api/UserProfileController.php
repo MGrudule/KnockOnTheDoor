@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\User;
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\UserProfileResource;
+use Auth;
 use Illuminate\Http\Request;
 
 class UserProfileController extends ApiController
