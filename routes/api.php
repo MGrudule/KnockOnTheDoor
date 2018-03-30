@@ -11,11 +11,6 @@
 |
 */
 
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\CircleController;
-use App\Http\Controllers\Api\MessageController;
-use App\Http\Controllers\Api\UserProfileController;
-
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login',    'Auth\LoginController@login');
 
