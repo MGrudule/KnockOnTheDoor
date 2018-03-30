@@ -71,7 +71,7 @@ class CategoryController extends ResourceController
     public function destroy(Category $category)
     {
         $category->delete();
-        return "Category deleted";
+        return "";
     }
 
 }

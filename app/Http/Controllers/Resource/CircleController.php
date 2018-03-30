@@ -82,6 +82,7 @@ class CircleController extends ResourceController
      */
     public function destroy(Circle $circle)
     {
-        //
+        $circle->delete();
+        return "";
     }
 }

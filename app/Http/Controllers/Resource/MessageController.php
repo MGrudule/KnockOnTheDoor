@@ -71,7 +71,7 @@ class MessageController extends ResourceController
     public function destroy(Message $message)
     {
         $message->delete();
-        return "Message deleted";
+        return "";
     }
 
 }
