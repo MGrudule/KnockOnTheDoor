@@ -19,8 +19,8 @@ class MessageResource extends JsonResource
             'body' => $this->body,
             'user' => new UserResource($this->user),
             'subject' => new SubjectResource($this->subject),
-            'categories' => CategoryResource::collection($this->categories),
-            'tags' => array_column($this->tags->all(), 'tag'),
+            'categories' => CategoryResource::collection($this->categories->sortBy('name')),
+            'tags' => array_column($this->tags->sortBy('tag')->all(), 'tag'),
             'comment_count' => $this->comments->count(),
             'date' => $this->created_at,
         ];

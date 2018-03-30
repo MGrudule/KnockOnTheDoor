@@ -21,7 +21,9 @@ class UserProfileResource extends JsonResource
             $resources = $resourceGroup->resources()->
                 where(['user_id' => $this->id])->
                 get()->all();
-            $resourceGroup->names = array_column($resources, 'title');
+            $names = array_column($resources, 'title');
+            sort($names);
+            $resourceGroup->names = $names;
         }
 
         return [
@@ -30,7 +32,7 @@ class UserProfileResource extends JsonResource
             'email' => $this->email,
             'summary' => $this->summary,
             'circle' => new CircleResource($this->circle),
-            'categories' => CategoryResource::collection($this->categories),
+            'categories' => CategoryResource::collection($this->categories->sortBy('name')),
             'resources' => $groupedResources,
         ];
     }
