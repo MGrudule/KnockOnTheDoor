@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\Resource\CategoryController;
 use App\Http\Controllers\Resource\CircleController;
 use App\Http\Controllers\Resource\MessageController;
 use App\Http\Controllers\Resource\ProfileController;
@@ -23,6 +24,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('current_profile', function () {
         return new ProfileResource(Auth::user());
     });
+    Route::resource('categories', 'Resource\CategoryController');
     Route::resource('circles',    'Resource\CircleController');
     Route::resource('messages',   'Resource\MessageController');
     Route::resource('profiles',   'Resource\ProfileController');
