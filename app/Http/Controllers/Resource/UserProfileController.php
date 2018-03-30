@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Resource;
 
 use App\User;
 use App\Http\Controllers\ResourceController;
-use App\Http\Resources\ProfileResource;
+use App\Http\Resources\UserProfileResource;
 use Illuminate\Http\Request;
 
-class ProfileController extends ResourceController
+class UserProfileController extends ResourceController
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class ProfileController extends ResourceController
      */
     public function index()
     {
-        return ProfileResource::collection(User::all());
+        return UserProfileResource::collection(User::all());
     }
 
     /**
@@ -82,6 +82,7 @@ class ProfileController extends ResourceController
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return "";
     }
 }

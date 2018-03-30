@@ -14,7 +14,7 @@
 use App\Http\Controllers\Resource\CategoryController;
 use App\Http\Controllers\Resource\CircleController;
 use App\Http\Controllers\Resource\MessageController;
-use App\Http\Controllers\Resource\ProfileController;
+use App\Http\Controllers\Resource\UserProfileController;
 use App\Http\Resources\ProfileResource;
 
 Route::post('register', 'Auth\RegisterController@register');
@@ -27,5 +27,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('categories', 'Resource\CategoryController');
     Route::resource('circles',    'Resource\CircleController');
     Route::resource('messages',   'Resource\MessageController');
-    Route::resource('profiles',   'Resource\ProfileController');
+    Route::resource('profiles',   'Resource\UserProfileController');
 });
