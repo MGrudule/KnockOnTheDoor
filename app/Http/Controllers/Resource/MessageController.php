@@ -27,7 +27,12 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->getData($request);
+        return new MessageResource(Message::create([
+            'user_id' => $data['user']['id'],
+            'subject_id' => $data['subject']['id'],
+            'body' => $data['body'],
+        ]));
     }
 
     /**
@@ -50,7 +55,11 @@ class MessageController extends Controller
      */
     public function update(Request $request, Message $message)
     {
-        //
+        $data = $this->getData($request);
+        $message->update([
+            'body' => $data['body'],
+        ]);
+        return new MessageResource($message);
     }
 
     /**
@@ -63,6 +72,11 @@ class MessageController extends Controller
     {
         $message->delete();
         return "Message deleted";
+    }
+
+    private function getData(Request $request)
+    {
+        return json_decode($request->getContent(), true)['data'];
     }
 
 }

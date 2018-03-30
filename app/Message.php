@@ -21,6 +21,8 @@ class Message extends Model
      */
     protected $dates = ['deleted_at'];
 
+    protected $guarded = [];
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'message_categories');
