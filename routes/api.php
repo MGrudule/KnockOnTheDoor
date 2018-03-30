@@ -14,6 +14,7 @@
 use App\Http\Controllers\Resource\CircleController;
 use App\Http\Controllers\Resource\MessageController;
 use App\Http\Controllers\Resource\ProfileController;
+use App\Http\Resources\ProfileResource;
 
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login',    'Auth\LoginController@login');

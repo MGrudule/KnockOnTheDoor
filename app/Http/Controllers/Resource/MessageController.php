@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Resource;
 
 use App\Message;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ResourceController;
 use App\Http\Resources\MessageResource;
+use Illuminate\Http\Request;
 
-class MessageController extends Controller
+class MessageController extends ResourceController
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->getData($request);
+        $data = parent::getData($request);
         return new MessageResource(Message::create([
             'user_id' => $data['user']['id'],
             'subject_id' => $data['subject']['id'],
@@ -55,7 +55,7 @@ class MessageController extends Controller
      */
     public function update(Request $request, Message $message)
     {
-        $data = $this->getData($request);
+        $data = parent::getData($request);
         $message->update([
             'body' => $data['body'],
         ]);
@@ -72,11 +72,6 @@ class MessageController extends Controller
     {
         $message->delete();
         return "Message deleted";
-    }
-
-    private function getData(Request $request)
-    {
-        return json_decode($request->getContent(), true)['data'];
     }
 
 }

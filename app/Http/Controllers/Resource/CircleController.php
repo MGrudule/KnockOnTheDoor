@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Resource;
 
 use App\Circle;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ResourceController;
 use App\Http\Resources\CircleResource;
+use Illuminate\Http\Request;
 
-class CircleController extends Controller
+class CircleController extends ResourceController
 {
     /**
      * Display a listing of the resource.

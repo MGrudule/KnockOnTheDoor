@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Resource;
 
 use App\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ResourceController;
 use App\Http\Resources\ProfileResource;
+use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class ProfileController extends ResourceController
 {
     /**
      * Display a listing of the resource.
