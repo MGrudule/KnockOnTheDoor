@@ -16,7 +16,7 @@ class CategoryController extends ResourceController
      */
     public function index()
     {
-        return CategoryResource::collection(Category::all());
+        return CategoryResource::collection(Category::orderBy('name')->get());
     }
 
     /**
@@ -71,7 +71,7 @@ class CategoryController extends ResourceController
     public function destroy(Category $category)
     {
         $category->delete();
-        return "";
+        return response()->json();
     }
 
 }

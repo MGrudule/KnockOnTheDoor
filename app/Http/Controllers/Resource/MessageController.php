@@ -16,7 +16,7 @@ class MessageController extends ResourceController
      */
     public function index()
     {
-        return MessageResource::collection(Message::all());
+        return MessageResource::collection(Message::orderBy('created_at', 'desc')->get());
     }
 
     /**
@@ -71,7 +71,7 @@ class MessageController extends ResourceController
     public function destroy(Message $message)
     {
         $message->delete();
-        return "";
+        return response()->json();
     }
 
 }

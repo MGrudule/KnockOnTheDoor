@@ -16,7 +16,7 @@ class UserProfileController extends ResourceController
      */
     public function index()
     {
-        return UserProfileResource::collection(User::all());
+        return UserProfileResource::collection(User::orderBy('name')->get());
     }
 
     /**

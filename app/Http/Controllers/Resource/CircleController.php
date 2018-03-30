@@ -16,7 +16,7 @@ class CircleController extends ResourceController
      */
     public function index()
     {
-        return CircleResource::collection(Circle::all());
+        return CircleResource::collection(Circle::orderBy('title')->get());
     }
 
     /**
