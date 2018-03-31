@@ -1,0 +1,11 @@
+
+@push('scripts')
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+@endpush
+
+pm.test("response should be okay to process", function () {
+    pm.response.to.not.be.error;
+    pm.response.to.have.jsonBody("");
+    pm.response.to.not.have.jsonBody("error");
+});
+
