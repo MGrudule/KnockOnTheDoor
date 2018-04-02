@@ -12,7 +12,7 @@ class CircleSeeder extends Seeder
      */
     public function run()
     {
-        factory(Circle::class, 5)->create();
+        factory(Circle::class, 55)->create();
     }
 
 }

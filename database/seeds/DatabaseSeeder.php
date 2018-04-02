@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TagSeeder::class);
         $this->call(MessageSeeder::class);
         $this->call(CommentSeeder::class);
+
+        $this->call(MailSeeder::class);
     }
 
 }

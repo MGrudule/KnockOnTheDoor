@@ -25,15 +25,25 @@ class UserResourceSeeder extends Seeder
     private function addResources($user, $userResourceCategory)
     {
         // randomly add 3 to 8 resources
-        $resources = Resource::inRandomOrder()->get();
-        for ($i=0; $i<rand(3,8); $i++) {
-            $resource = $resources->pop();
+        $resources = Resource::inRandomOrder()
+            ->limit(rand(3,8))
+            ->pluck('id');
+        foreach ($resources as $resourceId) {
             UserResource::create([
                 'user_id' => $user->id,
                 'category_id' => $userResourceCategory->id,
-                'resource_id' => $resource->id,
+                'resource_id' => $resourceId,
             ]);
         }
+
+        // should work? but doesn't
+        // $resources = Resource::inRandomOrder()
+        //     ->limit(rand(3,8))
+        //     ->pluck('id')
+        //     ->map(function ($id) use ($userResourceCategory) {
+        //         return [ $id => ['category_id' => $userResourceCategory->id] ];
+        //     });
+        // $user->resources()->sync($resources);
     }
 
 }
