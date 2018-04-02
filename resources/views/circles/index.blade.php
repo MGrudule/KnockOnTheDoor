@@ -32,7 +32,7 @@
       <td>{{ $circle->updated_at->toFormattedDateString() }}</td>
       <td>
         <a class="material-icons"
-           style="font-size: 20px;"
+           style="font-size: 16px"
            href="{{ route('circles.edit', $circle->id) }}">edit</a>
       </td>
       <td>
@@ -44,7 +44,7 @@
           {{ method_field('DELETE') }}
           <input class="material-icons"
                   type="submit" value="delete"
-                 style="border:none; background:none; cursor:pointer; color:red; font-size: 20px;">
+                 style="border:none; background:none; cursor:pointer; color:red; font-size: 16px">
         </form>
       </td>
     </tr>
