@@ -15,7 +15,7 @@ class Resources extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('title')->unique();
             $table->text('description')->nullable();
             $table->integer('type_id')->unsigned()->nullable();
             $table->foreign('type_id')->references('id')->on('resource_type_dmn');

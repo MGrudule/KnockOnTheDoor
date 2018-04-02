@@ -1,10 +1,11 @@
 <?php
 
+use App\Circle;
 use Faker\Generator as Faker;
 
-$factory->define(App\Circle::class, function (Faker $faker) {
+$factory->define(Circle::class, function (Faker $faker) {
     return [
-        'title' => ucfirst($faker->word),
+        'title' => ucfirst($faker->unique()->word),
         'description' => $faker->sentence,
     ];
 });

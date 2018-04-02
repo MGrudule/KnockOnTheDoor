@@ -15,7 +15,7 @@ class ResourceTypeDmn extends Migration
     {
         Schema::create('resource_type_dmn', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('title')->unique();
             $table->text('description')->nullable();
             $table->timestamps();
         });
