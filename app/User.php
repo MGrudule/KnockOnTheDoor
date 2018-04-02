@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Category;
 use App\Circle;
-use App\Profile;
 use App\Resource;
 
 class User extends Authenticatable
@@ -20,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'summary'
+        'circle_id', 'name', 'email', 'password', 'summary'
     ];
 
     /**
@@ -29,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'is_administrator'
+        'password', 'remember_token', 'api_token', 'is_administrator'
     ];
 
     /**
@@ -48,22 +47,38 @@ class User extends Authenticatable
         return $this->belongsTo(Circle::class);
     }
 
-    public function resources()
-    {
-        return $this->belongsToMany(Resource::class, 'user_resources')->
-            withPivot('category_id');
-    }
-
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'user_categories');
+        return $this->belongsToMany(Category::class,
+            'user_categories');
     }
 
-    public function resource_categories()
+    public function resources()
     {
-        return $this->belongsToMany(
-            UserResourceCategory::class, 'user_resources', 'user_id', 'category_id')->
-            withPivot('resource_id');
+        return $this->belongsToMany(Resource::class,
+            'user_resources'
+        )->withPivot('category_id');
     }
 
+    public function resourceCategories()
+    {
+        return $this->belongsToMany(UserResourceCategory::class,
+            'user_resources', 'user_id', 'category_id'
+        )->withPivot('resource_id');
+    }
+
+    public function resourcesGroupedByCategory()
+    {
+        return UserResourceCategory::select('id', 'title')
+            ->get()
+            ->map(function ($category, $key) {
+                $category->names = $category
+                    ->resourcesForUser($this)
+                    ->orderby('title')
+                    ->pluck('title')
+                    ->all();
+                return $category;
+            })
+            ->all();
+    }
 }
