@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
+    private $validationRules = [
+        'name' => 'required',
+        'color' => 'required',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +42,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->validationRules);
+        $category = Category::create($request->all());
+
+        flash('Successfully created category ' . $category->id);
         return $this->index();
     }
 
@@ -71,7 +80,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        return $this->show($category);
+        $request->validate($this->validationRules);
+        $category->update($request->all());
+
+        flash('Successfully updated category ' . $category->id);
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -82,8 +95,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete;
-        return $this->index();
+        $category->delete();
+        flash('Successfully deleted category ' . $category->id);
+        return back();
     }
 
 }

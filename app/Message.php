@@ -14,14 +14,14 @@ class Message extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = ['user_id', 'subject_id', 'body'];
+
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
     protected $dates = ['deleted_at'];
-
-    protected $guarded = [];
 
     public function categories()
     {
@@ -47,5 +47,4 @@ class Message extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }

@@ -8,17 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Resource extends Model
 {
-    public function user_resources()
+    protected $fillable = ['type_id', 'title', 'description'];
+
+    public function users()
     {
-        return $this->belongsToMany(User::class, 'user_resources')->
-            withPivot('category_id');
+        return $this->belongsToMany(User::class,
+            'user_resources'
+        )->withPivot('category_id');
     }
 
-    public function user_resource_categories()
+    public function categories()
     {
-        return $this->belongsToMany(
-            UserResourceCategory::class, 'user_resources', 'resource_id', 'category_id')->
-            withPivot('user_id');
+        return $this->belongsToMany(UserResourceCategory::class,
+            'user_resources', 'resource_id', 'category_id'
+        )->withPivot('user_id');
     }
-
 }

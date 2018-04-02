@@ -64,4 +64,5 @@ class CircleController extends ApiController
         $circle->delete();
         return response()->json();
     }
+
 }

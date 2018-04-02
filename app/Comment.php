@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    protected $fillable = ['user_id', 'message_id', 'comment'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -17,5 +19,4 @@ class Comment extends Model
     {
         return $this->belongsTo(Message::class);
     }
-
 }
