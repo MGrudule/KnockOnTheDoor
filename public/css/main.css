@@ -1,0 +1,12 @@
+p {
+    max-width: 600px;
+}
+
+.card {
+    min-width: 600px;
+}
+
+.blade-code {
+    font-family: monospace;
+    max-width: 600px;
+}
