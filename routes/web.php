@@ -11,8 +11,23 @@
 |
 */
 
+Route::get('/', function() {
+    return view('home');
+});
+
 Auth::routes();
-Route::get('/', 'Web\HomeController@index')->name('home');
-Route::resource('/categories', 'Web\CategoryController');
-Route::resource('/circles', 'Web\CircleController');
-Route::resource('/users', 'Web\UserController');
+
+Route::middleware(['auth:web'])->group(function() {
+    $updateOnly = ['only'=>['index', 'show', 'edit', 'update']];
+
+    Route::get('/home', 'Web\HomeController@index')->name('home');
+    Route::resource('/categories', 'Web\CategoryController');
+    Route::resource('/circles', 'Web\CircleController');
+    Route::resource('/mails', 'Web\MailController', $updateOnly);
+    Route::resource('/users', 'Web\UserController');
+});
+
+Route::get('/mailable', function () {
+    $registrar = Auth::user() ?: App\User::find(2);
+    return new App\Mail\Welcome(App\User::find(4), $registrar);
+});
