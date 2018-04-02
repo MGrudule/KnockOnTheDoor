@@ -9,6 +9,8 @@
 
   <title>{{ config('app.web_name', 'KnockHQ') }}</title>
 
+  <script src="{{ asset('js/app.js') }}"></script>
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
@@ -67,11 +69,12 @@
     </nav>
 
     <main class="py-4">
+      <!-- <pre> -->
+        <!-- yield('content') -->
+      <!-- </pre> -->
       @yield('content')
     </main>
   </div>
-
-  <script src="{{ asset('js/app.js') }}"></script>
 
   <!-- autosize textareas -->
   <script src="/js/autosize.min.js"></script>
