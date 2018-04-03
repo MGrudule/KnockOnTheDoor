@@ -8,7 +8,7 @@
   @endslot
   @slot('links')
     <a href="{{ route('users.create') }}">
-      Create
+      Register new user
     </a>
   @endslot
 
