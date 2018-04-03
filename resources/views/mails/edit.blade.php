@@ -44,8 +44,8 @@
              value="{{ old('attach', $mail->attach) ?: $mail->attach }}">
     </div>
     <input class="btn" type="submit" value="Update">
+    <input class="btn" type="reset" value="Reset">
     @cancelbtn Cancel @endcancelbtn
-    <button class="btn" onclick="return false;">Send test mail</button>
   </form>
 @endcard
 

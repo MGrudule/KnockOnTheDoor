@@ -56,7 +56,23 @@
       <td>{{ $mail->updated_at->format('d-m-Y h:m') }}</td>
     </tr>
   </table>
-  @indexbtn Go to index @endindexbtn
+  <form>
+    <div class="row">
+      <div class="col">
+        @indexbtn Go to index @endindexbtn
+      </div>
+      <div class="col">
+        <button class="btn" type="submit" formaction="{{ route($mail->view) }}">
+          Preview
+        </button>
+      </div>
+      <div class="col">
+        <button class="btn" type="submit" formaction="{{ route($mail->view . '.send') }}">
+          Send test mail
+        </button>
+      </div>
+    </div>
+  </form>
 @endcard
 
 @endsection
