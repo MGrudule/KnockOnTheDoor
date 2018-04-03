@@ -45,7 +45,7 @@ class MailController extends Controller
         $request->validate($this->validationRules);
         $mail = Mail::create($request->all());
 
-        flash('Successfully created mail ' . $mail->id);
+        flash('Successfully created mail');
         return $this->index();
     }
 
@@ -83,8 +83,11 @@ class MailController extends Controller
         $request->validate($this->validationRules);
         $mail->update($request->all());
 
-        flash('Successfully updated mail ' . $mail->id);
-        return redirect()->route('mails.index');
+        $file = app()->get('view.finder')->find($mail->view);
+        file_put_contents($file, $mail->body);
+
+        flash('Successfully updated mail');
+        return redirect()->route('mails.show', $mail->id);
     }
 
     /**
@@ -96,7 +99,18 @@ class MailController extends Controller
     public function destroy(Mail $mail)
     {
         $mail->delete();
-        flash('Successfully deleted mail ' . $mail->id);
+        flash('Successfully deleted mail');
         return back();
+    }
+
+    public function sendTestMail() {
+        $this->sendWelcomeMail(Auth::user(), Auth::user());
+        flash('Test mail sent successfully');
+        return back();
+    }
+
+    public function sendWelcomeMail($user, $registrar) {
+        return \Mail::to($user)->send(
+            new \App\Mail\Welcome($user, $registrar));
     }
 }
