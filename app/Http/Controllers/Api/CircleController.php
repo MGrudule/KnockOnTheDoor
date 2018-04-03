@@ -27,7 +27,11 @@ class CircleController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        $data = parent::getData($request);
+        return new CircleResource(Circle::create([
+            'title' => $data['name'],
+            'description' => $data['description'],
+        ]));
     }
 
     /**
@@ -38,7 +42,7 @@ class CircleController extends ApiController
      */
     public function show(Circle $circle)
     {
-        //
+        return new CircleResource($circle);
     }
 
     /**
@@ -50,7 +54,12 @@ class CircleController extends ApiController
      */
     public function update(Request $request, Circle $circle)
     {
-        //
+        $data = parent::getData($request);
+        $circle->update([
+            'title' => $data['name'],
+            'description' => $data['description'],
+        ]);
+        return new CircleResource($circle);
     }
 
     /**
