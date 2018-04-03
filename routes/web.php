@@ -25,9 +25,11 @@ Route::middleware(['auth:web'])->group(function() {
     Route::resource('/circles', 'Web\CircleController');
     Route::resource('/mails', 'Web\MailController', $updateOnly);
     Route::resource('/users', 'Web\UserController');
-});
 
-Route::get('/mailable', function () {
-    $registrar = Auth::user() ?: App\User::find(2);
-    return new App\Mail\Welcome(App\User::find(4), $registrar);
+    Route::get('/mail/welcome', function () {
+        return new App\Mail\Welcome(Auth::user(), Auth::user());
+    })->name('mail.welcome');
+
+    Route::get('/mail/welcome/send',
+        'Web\MailController@sendTestMail')->name('mail.welcome.send');
 });
