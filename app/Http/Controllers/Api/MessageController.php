@@ -7,6 +7,7 @@ use App\Tag;
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\MessageResource;
+use Auth;
 use Illuminate\Http\Request;
 
 class MessageController extends ApiController
