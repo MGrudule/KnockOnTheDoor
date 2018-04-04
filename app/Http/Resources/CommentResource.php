@@ -19,6 +19,7 @@ class CommentResource extends JsonResource
             'comment' => $this->comment,
             'user' => new UserResource($this->user),
             'message_id' => $this->message_id,
+            'date' => $this->created_at,
         ];
     }
 }
