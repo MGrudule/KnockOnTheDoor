@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Message;
+use App\Comment;
 use App\Http\Controllers\ApiController;
-use App\Http\Resources\MessageResource;
+use App\Http\Resources\CommentResource;
 use Illuminate\Http\Request;
 
-class MessageController extends ApiController
+class CommentController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class MessageController extends ApiController
      */
     public function index()
     {
-        return MessageResource::collection(Message::latest()->get());
+        return CommentResource::collection(Comment::latest()->get());
     }
 
     /**
@@ -28,52 +28,50 @@ class MessageController extends ApiController
     public function store(Request $request)
     {
         $data = parent::getData($request);
-        $message = Message::create([
+        $comment = Comment::create([
+            'message_id' => $data['message_id'],
             'user_id' => $data['user_id'],
-            'subject_id' => $data['subject_id'],
-            'body' => $data['body'],
+            'comment' => $data['comment'],
         ]);
-        $message->categories()->sync($data['categories']);
-        // TODO: tags
-        return new MessageResource($message);
+        return new CommentResource($comment);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Message  $message
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show(Comment $comment)
     {
-        return new MessageResource($message);
+        return new CommentResource($comment);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Message  $message
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Message $message)
+    public function update(Request $request, Comment $comment)
     {
         $data = parent::getData($request);
-        $message->update([
-            'body' => $data['body'],
+        $comment->update([
+            'comment' => $data['comment'],
         ]);
-        return new MessageResource($message);
+        return new CommentResource($comment);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Message  $message
+     * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function destroy(Comment $comment)
     {
-        $message->delete();
+        $comment->delete();
         return response()->json();
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\UserResourceCategory;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserProfileResource extends JsonResource

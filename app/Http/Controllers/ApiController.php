@@ -8,7 +8,8 @@ class ApiController extends Controller
 {
     protected static function getData(Request $request)
     {
-        return json_decode($request->getContent(), true)['data'];
+        return json_decode($request->getContent(), true);
+        // return $request->json();
     }
 
 }
