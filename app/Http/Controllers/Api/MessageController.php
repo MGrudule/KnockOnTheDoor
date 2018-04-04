@@ -31,7 +31,7 @@ class MessageController extends ApiController
     {
         $data = parent::getData($request);
         $message = Message::create([
-            'user_id' => $data['user_id'],
+            'user_id' => Auth::user()->id,
             'subject_id' => $data['subject_id'],
             'body' => $data['body'],
         ]);
