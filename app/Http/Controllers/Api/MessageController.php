@@ -7,7 +7,6 @@ use App\Tag;
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\MessageResource;
-use Auth;
 use Illuminate\Http\Request;
 
 class MessageController extends ApiController
@@ -32,7 +31,7 @@ class MessageController extends ApiController
     {
         $data = parent::getData($request);
         $message = Message::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => auth()->user()->id,
             'subject_id' => $data['subject_id'],
             'body' => $data['body'],
         ]);

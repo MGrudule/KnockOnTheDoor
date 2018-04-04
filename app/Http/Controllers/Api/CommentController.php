@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Comment;
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\CommentResource;
-use Auth;
 use Illuminate\Http\Request;
 
 class CommentController extends ApiController
@@ -31,7 +30,7 @@ class CommentController extends ApiController
         $data = parent::getData($request);
         $comment = Comment::create([
             'message_id' => $data['message_id'],
-            'user_id' => Auth::user()->id,
+            'user_id' => auth()->user()->id,
             'comment' => $data['comment'],
         ]);
         return new CommentResource($comment);

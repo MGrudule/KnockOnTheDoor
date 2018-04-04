@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\User;
 use App\Http\Controllers\ApiController;
 use App\Http\Resources\UserProfileResource;
-use Auth;
 use Illuminate\Http\Request;
 
 class UserProfileController extends ApiController
@@ -43,7 +42,7 @@ class UserProfileController extends ApiController
     }
 
     public function currentProfile() {
-        return new UserProfileResource(Auth::user());
+        return new UserProfileResource(auth()->user());
     }
 
     /**
