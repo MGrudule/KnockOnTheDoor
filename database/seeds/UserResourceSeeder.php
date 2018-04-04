@@ -4,6 +4,7 @@ use App\Resource;
 use App\User;
 use App\UserResource;
 use App\UserResourceCategory;
+use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 
 class UserResourceSeeder extends Seeder
@@ -13,20 +14,32 @@ class UserResourceSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
+        echo env('SEED_AMOUNT_USER_RESOURCE_MIN') .
+            " to " .
+            env('SEED_AMOUNT_USER_RESOURCE_MAX') .
+            " resources per user\n";
+
         foreach (User::all() as $user) {
             foreach (UserResourceCategory::all() as $userResourceCategory) {
-                $this->addResources($user, $userResourceCategory);
+                $this->addResources($faker, $user, $userResourceCategory);
             }
         }
     }
 
-    private function addResources($user, $userResourceCategory)
+    private function addResources($faker, $user, $userResourceCategory)
     {
-        // randomly add 3 to 8 resources
+        $n = $faker->biasedNumberBetween(
+            env('SEED_AMOUNT_USER_RESOURCE_MIN') ?: 3,
+            env('SEED_AMOUNT_USER_RESOURCE_MAX') ?: 8
+        );
+        $n = -$n +
+            (env('SEED_AMOUNT_USER_RESOURCE_MIN') ?: 3) +
+            (env('SEED_AMOUNT_USER_RESOURCE_MAX') ?: 8);
+
         $resources = Resource::inRandomOrder()
-            ->limit(rand(3,8))
+            ->limit($n)
             ->pluck('id');
         foreach ($resources as $resourceId) {
             UserResource::create([
@@ -38,7 +51,7 @@ class UserResourceSeeder extends Seeder
 
         // should work? but doesn't
         // $resources = Resource::inRandomOrder()
-        //     ->limit(rand(3,8))
+        //     ->limit($n)
         //     ->pluck('id')
         //     ->map(function ($id) use ($userResourceCategory) {
         //         return [ $id => ['category_id' => $userResourceCategory->id] ];
