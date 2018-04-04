@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Message;
+use App\Tag;
 use App\Http\Controllers\ApiController;
+use App\Http\Resources\CommentResource;
 use App\Http\Resources\MessageResource;
 use Illuminate\Http\Request;
 
@@ -34,7 +36,13 @@ class MessageController extends ApiController
             'body' => $data['body'],
         ]);
         $message->categories()->sync($data['categories']);
-        // TODO: tags
+
+        $message->tags()->sync(
+            array_map(function ($tag) {
+                return Tag::firstOrCreate(['tag' => $tag])->id;
+            }, $data['tags'])
+        );
+
         return new MessageResource($message);
     }
 
@@ -75,5 +83,11 @@ class MessageController extends ApiController
     {
         $message->delete();
         return response()->json();
+    }
+
+    public function comments(Message $message)
+    {
+        return CommentResource::collection(
+            $message->comments()->get());
     }
 }
