@@ -30,7 +30,7 @@ class CommentController extends ApiController
         $data = parent::getData($request);
         $comment = Comment::create([
             'message_id' => $data['message_id'],
-            'user_id' => $data['user_id'],
+            'user_id' => Auth::user()->id,
             'comment' => $data['comment'],
         ]);
         return new CommentResource($comment);
