@@ -34,9 +34,16 @@
       <label for="circle-select">Circle</label>
       <select class="form-control" id="circle-select" name="circle_id">
       @foreach ($circles as $circle)
-        <option value="{{ $circle->id }}">{{ $circle->title }}</option>
+        <option value="{{ $circle->id }}"{{ $circle->id == $user->circle_id ? ' selected' : '' }}>{{ $circle->title }}</option>
       @endforeach
       </select>
+    </div>
+    <div class="form-group">
+      <label for="file">Image</label>
+      <img src="{{ $user->imagePublicUrl() ?: '/storage/default.png' }}"
+           width='100px' height='100px'>
+      <input class="btn" class="form-control-file" type="file" name="file" id="file">
+      <input class="btn" type="submit" formaction="{{ route('users.update.image', $user->id) }}" value="Upload Image">
     </div>
     <input class="btn" type="submit" value="Update">
     @cancelbtn Cancel @endcancelbtn
