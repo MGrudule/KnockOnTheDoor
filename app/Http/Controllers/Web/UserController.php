@@ -34,7 +34,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $circles = Circle::orderBy('title')->get();
+        return view('users.create', compact('user', 'circles'));
     }
 
     /**
@@ -55,10 +56,11 @@ class UserController extends Controller
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
+            'circle_id' => $request->get('circle_id'),
         ]);
 
         flash('Successfully created user');
-        return $this->index();
+        return $this->show($user);
     }
 
     /**
