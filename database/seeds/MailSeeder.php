@@ -12,11 +12,12 @@ class MailSeeder extends Seeder
      */
     public function run()
     {
-        $view = app()->get('view.finder')->find('mail.welcome');
+        $viewName = 'mail.welcome';
+        $view = app('view.finder')->find($viewName);
 
         Mail::create([
             'title' => 'Welcome',
-            'view' => 'mail.welcome',
+            'view' => $viewName,
             'body' => file_get_contents($view),
             'subject' => 'Welcome',
         ]);
