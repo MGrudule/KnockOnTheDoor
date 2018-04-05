@@ -12,7 +12,7 @@
 */
 
 Route::post('login', 'Api\Auth\LoginController@login');
-Route::post('register', 'Api\Auth\RegisterController@register');
+// Route::post('register', 'Api\Auth\RegisterController@register');
 
 Route::middleware(['auth:api'])->group(function () {
     Route::apiResources([
@@ -22,8 +22,11 @@ Route::middleware(['auth:api'])->group(function () {
         '/messages' => 'Api\MessageController',
     ]);
 
-    $updateOnly = ['only'=>['index', 'show', 'update']];
-    Route::apiResource('/profiles', 'Api\UserProfileController', $updateOnly);
-    Route::get('/current_profile', 'Api\UserProfileController@currentProfile')->name('profiles.current_profile');
+    Route::apiResource('/profiles', 'Api\UserProfileController')
+        ->only(['index', 'show', 'update']);
+    Route::get('/current_profile', 'Api\UserProfileController@currentProfile')
+        ->name('profiles.current_profile');
     Route::get('/messages/{message}/comments', 'Api\MessageController@comments');
+
+    Route::post('/profile/image', 'Api\UserProfileController@updateImage');
 });
