@@ -18,13 +18,16 @@ Route::get('/', function() {
 Auth::routes();
 
 Route::middleware(['auth:web'])->group(function() {
-    $updateOnly = ['only'=>['index', 'show', 'edit', 'update']];
-
     Route::get('/home', 'Web\HomeController@index')->name('home');
     Route::resource('/categories', 'Web\CategoryController');
     Route::resource('/circles', 'Web\CircleController');
-    Route::resource('/mails', 'Web\MailController', $updateOnly);
+    // Route::resource('/comments', 'Web\CommentController');
+    Route::resource('/mails', 'Web\MailController')
+        ->only('index', 'show', 'update', 'edit');
+    // Route::resource('/messages', 'Web\MessageController');
     Route::resource('/users', 'Web\UserController');
+    Route::get('/users/{user}/image', 'Web\UserController@editImage')->name('users.edit.image');
+    Route::put('/users/{user}/image', 'Web\UserController@updateImage')->name('users.update.image');
 
     Route::get('/mail/welcome', function () {
         return new App\Mail\Welcome(Auth::user(), Auth::user());
