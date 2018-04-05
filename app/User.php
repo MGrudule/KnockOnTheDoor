@@ -2,13 +2,13 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-
 use App\Category;
 use App\Circle;
 use App\Resource;
 use App\UserResource;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -113,5 +113,18 @@ class User extends Authenticatable
                 ])->delete();
             }
         }
+    }
+
+    public function storeImage($file)
+    {
+        $path = $file->store('public');
+        $this->image = $path;
+        $this->save();
+        return back();
+    }
+
+    public function imagePublicUrl()
+    {
+        return Storage::url($this->image);
     }
 }
