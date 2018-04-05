@@ -20,8 +20,7 @@
     </div>
     <div class="form-group">
       <label for="color">Color</label>
-      <input class="form-control" id="color" name="color" type="color"
-             value="{{ old('color') }}" />
+      <input class="form-control" id="color" name="color" type="color" value="{{ old('color') }}">
     </div>
     <input class="btn" type="submit" value="Create">
     @cancelbtn Cancel @endcancelbtn
