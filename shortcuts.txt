@@ -1,4 +1,8 @@
-gs          - git status
+gs       - git status
+gd       - git diff
+ga       - git add
+gc [msg] - git commit -m "[msg]"
+
 art         - php artisan
 rl          - php artisan route:list
 m           - php artisan migrate
