@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Category;
 use App\Circle;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -58,6 +59,10 @@ class UserController extends Controller
             'password' => Hash::make($request->get('password')),
             'circle_id' => $request->get('circle_id'),
         ]);
+
+        $user->categories()->attach(
+            Category::pluck('id')->all()
+        );
 
         flash('Successfully created user');
         return $this->show($user);
