@@ -1,0 +1,9 @@
+gs          - git status
+art         - php artisan
+rl          - php artisan route:list
+m           - php artisan migrate
+rb [step]   - php artisan migrate:rollback --step [step]
+seed [name] - php artisan db:seed --class [name]Seeder
+mf          - composer dumpautoload
+              php artisan migrate:fresh
+              php artisan db:seed --env seeding
