@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Category;
 use App\Circle;
 use App\Resource;
+use App\UserResource;
 
 class User extends Authenticatable
 {
@@ -80,5 +81,37 @@ class User extends Authenticatable
                 return $category;
             })
             ->all();
+    }
+
+    public function updateResources($resources)
+    {
+        foreach ($resources as $category) {
+            $resourceIds = array_map(function ($resource) {
+                return Resource::firstOrCreate(['title' => $resource])->id;
+            }, $category['names']);
+
+            $existingResources = UserResourceCategory::find($category['id'])
+                ->resourcesForUser($this)
+                ->get()
+                ->keyBy('id');
+            foreach ($resourceIds as $resourceId) {
+                if (isset($existingResources[$resourceId])) {
+                    unset($existingResources[$resourceId]);
+                } else {
+                    UserResource::create([
+                        'user_id' => $this->id,
+                        'resource_id' => $resourceId,
+                        'category_id'=> $category['id'],
+                    ]);
+                }
+            }
+            foreach ($existingResources as $resource) {
+                UserResource::where([
+                    'user_id' => $this->id,
+                    'resource_id' => $resource->id,
+                    'category_id'=> $category['id'],
+                ])->delete();
+            }
+        }
     }
 }

@@ -36,12 +36,7 @@ class MessageController extends ApiController
             'body' => $data['body'],
         ]);
         $message->categories()->sync($data['categories']);
-
-        $message->tags()->sync(
-            array_map(function ($tag) {
-                return Tag::firstOrCreate(['tag' => $tag])->id;
-            }, $data['tags'])
-        );
+        $message->syncTags($data['tags']);
 
         return new MessageResource($message);
     }
@@ -68,8 +63,12 @@ class MessageController extends ApiController
     {
         $data = parent::getData($request);
         $message->update([
+            'subject_id' => $data['subject_id'],
             'body' => $data['body'],
         ]);
+        $message->categories()->sync($data['categories']);
+        $message->syncTags($data['tags']);
+
         return new MessageResource($message);
     }
 

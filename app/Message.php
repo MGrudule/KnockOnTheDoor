@@ -47,4 +47,13 @@ class Message extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function syncTags($tags)
+    {
+        $this->tags()->sync(
+            array_map(function ($tag) {
+                return Tag::firstOrCreate(['tag' => $tag])->id;
+            }, $tags)
+        );
+    }
 }
