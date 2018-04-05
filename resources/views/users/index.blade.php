@@ -54,6 +54,7 @@
     </tr>
   @endforeach
   </table>
+  {{ $users->links() }}
 @endcard
 
 @endsection
