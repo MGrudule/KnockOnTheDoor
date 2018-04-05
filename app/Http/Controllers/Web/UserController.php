@@ -65,7 +65,7 @@ class UserController extends Controller
         );
 
         flash('Successfully created user');
-        return $this->show($user);
+        return redirect()->route('users.show', $user->id);
     }
 
     /**
