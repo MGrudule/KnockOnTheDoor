@@ -15,7 +15,9 @@ Route::get('/', function() {
     return view('home');
 });
 
-Auth::routes();
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'Auth\LoginController@login');
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::middleware(['auth:web'])->group(function() {
     Route::get('/home', 'Web\HomeController@index')->name('home');
