@@ -12,8 +12,6 @@ class UserController extends Controller
 {
     private $validationRules = [
         'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:6|confirmed',
     ];
 
     public $pageSize = 10;
@@ -48,13 +46,18 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate($this->validationRules);
+        $request->validate([
+            'password' => 'required|string|min:6|confirmed',
+            'email' => 'required|string|email|max:255|unique:users',
+        ]);
+
         $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
         ]);
 
-        flash('Successfully created user ' . $user->id);
+        flash('Successfully created user');
         return $this->index();
     }
 
@@ -91,14 +94,32 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate($this->validationRules);
-        $user->update([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-        ]);
 
-        flash('Successfully updated user ' . $user->id);
-        return redirect()->route('users.index');
+        $update = [
+            'name' => $request->get('name'),
+            'circle_id' => $request->get('circle_id'),
+        ];
+
+        if ($request->get('email') != $user->email) {
+            $request->validate(
+                ['email' => 'required|string|email|max:255|unique:users'
+            ]);
+            $update['email'] = $request->get('email');
+        }
+
+        if ($request->get('password')) {
+            if ($request->get('password') == $request->get('password_confirm')) {
+                $update['password'] = Hash::make($request->get('password'));
+            } else {
+                flash('Passwords do not match')->error();
+                return back();
+            }
+        }
+
+        $user->update($update);
+        flash('Successfully updated user');
+
+        return back();
     }
 
     /**
@@ -110,8 +131,29 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        flash('Successfully deleted user ' . $user->id);
+        flash('Successfully deleted user');
         return back();
     }
 
+    public function editImage(Request $request, User $user)
+    {
+        return view('test')->with([
+            'image' => $user->imagePublicUrl(),
+        ]);
+    }
+
+    public function updateImage(Request $request, User $user)
+    {
+        if ($request->hasFile('file')) {
+            if ($request->file('file')->isValid()) {
+                $user->storeImage($request->file('file'));
+                flash('Successfully uploaded image');
+            } else {
+                flash('File is invalid')->error();
+            }
+        } else {
+            flash('No file on request')->error();
+        }
+        return back();
+    }
 }

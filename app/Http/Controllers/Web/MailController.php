@@ -83,7 +83,7 @@ class MailController extends Controller
         $request->validate($this->validationRules);
         $mail->update($request->all());
 
-        $file = app()->get('view.finder')->find($mail->view);
+        $file = app('view.finder')->find($mail->view);
         file_put_contents($file, $mail->body);
 
         flash('Successfully updated mail');

@@ -55,15 +55,27 @@ class UserProfileController extends ApiController
     public function update(Request $request, User $profile)
     {
         $data = parent::getData($request);
-        $profile->update([
-            'name' => $data['name'],
-            // 'email' => $data['email'],
-            'summary' => $data['summary'],
-        ]);
+
+        $update = [ 'name' => $data['name'] ];
+        $errors = [];
+
+        if ($data['email'] != $profile->email) {
+            $update['email'] = $data['email'];
+        }
+
+        if (isset($data['password'])) {
+            if ($data['password'] == $data['password_confirm']) {
+                $update['password'] = Hash::make($data['password']);
+            } else {
+                $errors[] = 'Passwords do not match';
+                return back();
+            }
+        }
+        $profile->update($update);
         $profile->categories()->sync($data['categories']);
         $profile->updateResources($data['resources']);
 
-        return new UserProfileResource($profile);
+        return new UserProfileResource($profile, $errors);
     }
 
     /**
@@ -83,18 +95,14 @@ class UserProfileController extends ApiController
         $response = [];
         if ($request->hasFile('file')) {
             if ($request->file('file')->isValid()) {
-                $this->storeImage($request->file('file'));
+                auth()->user()->storeImage($request->file('file'));
             } else {
-                $response['error'] = "File is invalid";
+                $response['errors'][] = "File is invalid";
             }
         } else {
-            $response['error'] = "No file on request";
+            $response['errors'][] = "No file on request";
         }
-        return response()->json($response);
-    }
-
-    private function storeImage($file)
-    {
-        $file->store('public');
+        $status = isset($response['errors']) ? 400 : 200;
+        return response()->json($response, $status);
     }
 }
