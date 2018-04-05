@@ -104,13 +104,8 @@ class MailController extends Controller
     }
 
     public function sendTestMail() {
-        $this->sendWelcomeMail(Auth::user(), Auth::user());
+        auth()->user()->sendWelcomeMail(auth()->user());
         flash('Test mail sent successfully');
         return back();
-    }
-
-    public function sendWelcomeMail($user, $registrar) {
-        return \Mail::to($user)->send(
-            new \App\Mail\Welcome($user, $registrar));
     }
 }

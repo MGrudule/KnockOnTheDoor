@@ -127,4 +127,9 @@ class User extends Authenticatable
     {
         return Storage::url($this->image);
     }
+
+    public function sendWelcomeMail($registrar) {
+        return \Mail::to($this)->send(
+            new \App\Mail\Welcome($this, $registrar));
+    }
 }

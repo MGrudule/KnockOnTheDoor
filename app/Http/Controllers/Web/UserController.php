@@ -65,6 +65,8 @@ class UserController extends Controller
         );
 
         flash('Successfully created user');
+        $user->sendWelcomeMail(auth()->user());
+        flash('A welcome mail has been sent');
         return redirect()->route('users.show', $user->id);
     }
 
