@@ -33,12 +33,12 @@ class UserProfileController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\User  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $profile)
     {
-        //
+        return new UserProfileResource($profile);
     }
 
     public function currentProfile() {
@@ -49,24 +49,52 @@ class UserProfileController extends ApiController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\User  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $profile)
     {
-        //
+        $data = parent::getData($request);
+        $profile->update([
+            'name' => $data['name'],
+            // 'email' => $data['email'],
+            'summary' => $data['summary'],
+        ]);
+        $profile->categories()->sync($data['categories']);
+        $profile->updateResources($data['resources']);
+
+        return new UserProfileResource($profile);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\User  $profile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $profile)
     {
-        $user->delete();
+        $profile->delete();
         return response()->json();
     }
 
+    public function updateImage(Request $request)
+    {
+        $response = [];
+        if ($request->hasFile('file')) {
+            if ($request->file('file')->isValid()) {
+                $this->storeImage($request->file('file'));
+            } else {
+                $response['error'] = "File is invalid";
+            }
+        } else {
+            $response['error'] = "No file on request";
+        }
+        return response()->json($response);
+    }
+
+    private function storeImage($file)
+    {
+        $file->store('public');
+    }
 }
