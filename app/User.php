@@ -125,7 +125,7 @@ class User extends Authenticatable
 
     public function imagePublicUrl()
     {
-        return Storage::url($this->image);
+        return $this->image ? Storage::url($this->image) : '/profile.png';
     }
 
     public function sendWelcomeMail($registrar) {
