@@ -68,7 +68,6 @@ class UserProfileController extends ApiController
                 $update['password'] = Hash::make($data['password']);
             } else {
                 $errors[] = 'Passwords do not match';
-                return back();
             }
         }
         $profile->update($update);
