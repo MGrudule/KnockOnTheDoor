@@ -102,10 +102,4 @@ class MailController extends Controller
         flash('Successfully deleted mail');
         return back();
     }
-
-    public function sendTestMail() {
-        auth()->user()->sendWelcomeMail(auth()->user());
-        flash('Test mail sent successfully');
-        return back();
-    }
 }

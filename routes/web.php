@@ -35,6 +35,20 @@ Route::middleware(['auth:web'])->group(function() {
         return new App\Mail\Welcome(Auth::user(), Auth::user());
     })->name('mail.welcome');
 
-    Route::get('/mail/welcome/send',
-        'Web\MailController@sendTestMail')->name('mail.welcome.send');
+    Route::get('/mail/welcome/send', function () {
+        auth()->user()->sendWelcomeMail(auth()->user());
+        flash('Test mail sent successfully');
+        return back();
+    })->name('mail.welcome.send');
+
+    Route::get('/mail/new_comment', function () {
+        return new App\Mail\NewComment();
+    })->name('mail.new_comment');
+
+    Route::get('/mail/new_comment/send', function () {
+        \Mail::to(auth()->user())->send(
+            new \App\Mail\NewComment());
+        flash('Test mail sent successfully');
+        return back();
+    })->name('mail.new_comment.send');
 });
