@@ -33,7 +33,15 @@ class CommentController extends ApiController
             'user_id' => auth()->user()->id,
             'comment' => $data['comment'],
         ]);
+        $this->sendNewCommentMail($comment);
         return new CommentResource($comment);
+    }
+
+    public function sendNewCommentMail(Comment $comment)
+    {
+        $to = $comment->message()->first()->user()->first();
+        return \Mail::to($to)->send(
+            new \App\Mail\NewComment($comment));
     }
 
     /**
