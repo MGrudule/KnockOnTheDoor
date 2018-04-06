@@ -12,24 +12,26 @@ class MailSeeder extends Seeder
      */
     public function run()
     {
-        $viewName = 'mail.welcome';
-        $view = app('view.finder')->find($viewName);
+        if (!env('SELECT_MAILS') || env('CREATE_WELCOME_MAIL')) {
+            $viewName = 'mail.welcome';
+            $view = app('view.finder')->find($viewName);
+            Mail::create([
+                'title' => 'Welcome',
+                'view' => $viewName,
+                'body' => file_get_contents($view),
+                'subject' => 'Welcome',
+            ]);
+        }
 
-        Mail::create([
-            'title' => 'Welcome',
-            'view' => $viewName,
-            'body' => file_get_contents($view),
-            'subject' => 'Welcome',
-        ]);
-
-        $viewName = 'mail.new_comment';
-        $view = app('view.finder')->find($viewName);
-
-        Mail::create([
-            'title' => 'New Comment',
-            'view' => $viewName,
-            'body' => file_get_contents($view),
-            'subject' => 'New Comment',
-        ]);
+        if (!env('SELECT_MAILS') || env('CREATE_NEW_COMMENT_MAIL')) {
+            $viewName = 'mail.new_comment';
+            $view = app('view.finder')->find($viewName);
+            Mail::create([
+                'title' => 'New Comment',
+                'view' => $viewName,
+                'body' => file_get_contents($view),
+                'subject' => 'New Comment',
+            ]);
+        }
     }
 }
