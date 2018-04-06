@@ -14,16 +14,26 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->create([
-            'email' => 't@e.st'
-        ]);
+        if (env('SEED_TEST_USERS')) {
+            echo "Seeding test users\n";
+            factory(User::class)->create([
+                'email' => 't@e.st'
+            ]);
+            factory(User::class)->create([
+                'email' => 't2@e.st'
+            ]);
+            factory(User::class)->create([
+                'email' => 't3@e.st'
+            ]);
+            factory(User::class)->create([
+                'email' => 'ad@m.in',
+                'is_administrator' => true,
+            ]);
+        }
 
-        factory(User::class)->create([
-            'email' => 'ad@m.in',
-            'is_administrator' => true,
-        ]);
-
-        factory(User::class, 8)->create();
+        $n = env('SEED_AMOUNT_USERS') ?: 50;
+        echo "Seeding " . $n . " users\n";
+        factory(User::class, $n+0)->create();
 
         foreach (User::all() as $user) {
             // set circle
