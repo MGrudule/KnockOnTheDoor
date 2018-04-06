@@ -14,23 +14,23 @@ class CategorySeeder extends Seeder
     {
         Category::create([
             "name" => "Building",
-            "color" => "#ffee4c",
+            "color" => "#44b2e5",
         ]);
         Category::create([
             "name" => "Music",
-            "color" => "#aebd38",
+            "color" => "#73c48f",
         ]);
         Category::create([
             "name" => "Business",
-            "color" => "#38bd8a",
+            "color" => "#c51883",
         ]);
         Category::create([
             "name" => "Gardening",
-            "color" => "#38aebd",
+            "color" => "#485daa",
         ]);
         Category::create([
             "name" => "Art",
-            "color" => "#ffaebd",
+            "color" => "#ede82d",
         ]);
     }
 
