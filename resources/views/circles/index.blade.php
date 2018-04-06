@@ -31,8 +31,7 @@
       <td>{{ str_limit($circle->description, 42) }}</td>
       <td>{{ $circle->updated_at->toFormattedDateString() }}</td>
       <td>
-        <a class="material-icons"
-           style="font-size: 16px"
+        <a class="material-icons" style="font-size: 16px"
            href="{{ route('circles.edit', $circle->id) }}">edit</a>
       </td>
       <td>
@@ -42,8 +41,7 @@
               onsubmit="return confirm('Are you sure?')">
           {{ csrf_field() }}
           {{ method_field('DELETE') }}
-          <input class="material-icons"
-                  type="submit" value="delete"
+          <input class="material-icons" type="submit" value="delete"
                  style="border:none; background:none; cursor:pointer; color:red; font-size: 16px">
         </form>
       </td>

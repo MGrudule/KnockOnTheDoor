@@ -46,8 +46,7 @@
               onsubmit="return confirm('Are you sure?')">
           {{ csrf_field() }}
           {{ method_field('DELETE') }}
-          <input class="material-icons"
-                  type="submit" value="delete"
+          <input class="material-icons" type="submit" value="delete"
                  style="border:none; background:none; cursor:pointer; color:red">
         </form>
       </td>
