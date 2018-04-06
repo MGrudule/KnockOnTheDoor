@@ -86,7 +86,6 @@ class MessageController extends ApiController
 
     public function comments(Message $message)
     {
-        return CommentResource::collection(
-            $message->comments()->get());
+        return CommentResource::collection($message->comments);
     }
 }

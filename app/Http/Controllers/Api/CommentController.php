@@ -39,8 +39,7 @@ class CommentController extends ApiController
 
     public function sendNewCommentMail(Comment $comment)
     {
-        $to = $comment->message()->first()->user()->first();
-        return \Mail::to($to)->send(
+        return \Mail::to($comment->message->user)->send(
             new \App\Mail\NewComment($comment));
     }
 
