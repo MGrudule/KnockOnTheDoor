@@ -21,5 +21,15 @@ class MailSeeder extends Seeder
             'body' => file_get_contents($view),
             'subject' => 'Welcome',
         ]);
+
+        $viewName = 'mail.new_comment';
+        $view = app('view.finder')->find($viewName);
+
+        Mail::create([
+            'title' => 'New Comment',
+            'view' => $viewName,
+            'body' => file_get_contents($view),
+            'subject' => 'New Comment',
+        ]);
     }
 }
