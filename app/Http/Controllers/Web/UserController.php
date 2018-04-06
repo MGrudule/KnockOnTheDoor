@@ -11,10 +11,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    private $validationRules = [
-        'name' => 'required|string|max:255',
-    ];
-
     public $pageSize = 10;
 
     /**
@@ -47,8 +43,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->validationRules);
         $request->validate([
+            'name' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
             'email' => 'required|string|email|max:255|unique:users',
         ]);
@@ -102,20 +98,20 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $request->validate($this->validationRules);
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        if ($request->get('email') != $user->email) {
+            $request->validate([
+                'email' => 'required|string|email|max:255|unique:users'
+            ]);
+        }
 
         $update = [
             'name' => $request->get('name'),
             'circle_id' => $request->get('circle_id'),
+            'email' => $request->get('email'),
         ];
-
-        if ($request->get('email') != $user->email) {
-            $request->validate(
-                ['email' => 'required|string|email|max:255|unique:users'
-            ]);
-            $update['email'] = $request->get('email');
-        }
-
         if ($request->get('password')) {
             if ($request->get('password') == $request->get('password_confirm')) {
                 $update['password'] = Hash::make($request->get('password'));
