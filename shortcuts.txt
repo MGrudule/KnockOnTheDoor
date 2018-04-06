@@ -2,6 +2,7 @@ gs       - git status
 gd       - git diff
 ga       - git add
 gc [msg] - git commit -m "[msg]"
+gl       - git log --oneline
 
 art         - php artisan
 rl          - php artisan route:list
