@@ -16,6 +16,7 @@
   <tr>
     <th>Title</th>
     <th>Description</th>
+    <th>Users</th>
     <th>Last Update</th>
     <th>Edit</th>
     <th>Delete</th>
@@ -29,6 +30,7 @@
         </a>
       </td>
       <td>{{ str_limit($circle->description, 42) }}</td>
+      <td>{{ $circle->users->count() }}</td>
       <td>{{ $circle->updated_at->toFormattedDateString() }}</td>
       <td>
         <a class="material-icons" style="font-size: 16px"
