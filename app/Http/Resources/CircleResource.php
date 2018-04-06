@@ -18,6 +18,7 @@ class CircleResource extends JsonResource
             'id' => $this->id,
             'name' => $this->title,
             'users' => UserResource::collection($this->users),
+            'user_count' => $this->users->count(),
         ];
     }
 }
