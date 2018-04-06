@@ -42,12 +42,12 @@ Route::middleware(['auth:web'])->group(function() {
     })->name('mail.welcome.send');
 
     Route::get('/mail/new_comment', function () {
-        return new App\Mail\NewComment();
+        return new App\Mail\NewComment(App\Comment::first());
     })->name('mail.new_comment');
 
     Route::get('/mail/new_comment/send', function () {
         \Mail::to(auth()->user())->send(
-            new \App\Mail\NewComment());
+            new App\Mail\NewComment(App\Comment::first()));
         flash('Test mail sent successfully');
         return back();
     })->name('mail.new_comment.send');
