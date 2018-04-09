@@ -9,6 +9,8 @@
 
   <title>{{ config('app.web_name', 'KnockHQ') }}</title>
 
+  <link rel="icon" href="/favicon.ico?v=1">
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
