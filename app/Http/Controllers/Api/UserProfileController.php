@@ -16,7 +16,7 @@ class UserProfileController extends ApiController
      */
     public function index()
     {
-        return UserProfileResource::collection(User::orderBy('name')->get());
+        return UserProfileResource::collection(User::orderBy('name')->paginate(50));
     }
 
     /**
@@ -41,7 +41,8 @@ class UserProfileController extends ApiController
         return new UserProfileResource($profile);
     }
 
-    public function currentProfile() {
+    public function currentProfile()
+    {
         return new UserProfileResource(auth()->user());
     }
 
