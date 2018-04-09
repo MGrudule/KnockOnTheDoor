@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
+    private $storage = 'users';
+
     /**
      * Run the database seeds.
      *
@@ -14,30 +16,42 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $images = $this->images;
         if (env('SEED_TEST_USERS')) {
             echo "Test users\n";
             factory(User::class)->create([
-                'email' => 't@e.st'
+                'email' => 't@e.st',
+                'image' => $this->storage . '/' . array_pop($images),
             ]);
             factory(User::class)->create([
-                'email' => 't2@e.st'
+                'email' => 't2@e.st',
+                'image' => $this->storage . '/' . array_pop($images),
             ]);
             factory(User::class)->create([
-                'email' => 't3@e.st'
+                'email' => 't3@e.st',
+                'image' => $this->storage . '/' . array_pop($images),
             ]);
             factory(User::class)->create([
                 'email' => 'ad@m.in',
                 'is_administrator' => true,
+                'image' => $this->storage . '/' . array_pop($images),
             ]);
         }
 
         $n = env('SEED_AMOUNT_USERS') ?: 50;
         echo $n . " users\n";
-        factory(User::class, $n+0)->create();
 
-        foreach (User::all() as $user) {
+        for ($i=0; $i<$n; $i++) {
+            $user = factory(User::class)->create();
+            if (!sizeof($images)) {
+                $images = $this->images;
+            }
+
             // set circle
-            $user->circle_id = Circle::inRandomOrder()->first()->id;
+            $user->update([
+                'circle_id' => Circle::inRandomOrder()->first()->id,
+                'image' => $this->storage . '/' . array_pop($images),
+            ]);
 
             // add 1 to 3 categories
             $categories = Category::inRandomOrder()->
@@ -48,4 +62,14 @@ class UserSeeder extends Seeder
         }
     }
 
+    private $images = [
+        'Karen.jpg',
+        'Frank.jpg',
+        'Annamarie.jpg',
+        'Dennis.jpg',
+        'Hannah.jpg',
+        'Sander.jpg',
+        'Annamarie_02.jpg',
+        'Tim.jpg',
+    ];
 }
