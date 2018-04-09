@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Message;
 use App\Tag;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\MessageResource;
 use Illuminate\Http\Request;
 
-class MessageController extends ApiController
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,7 @@ class MessageController extends ApiController
      */
     public function store(Request $request)
     {
-        $data = parent::getData($request);
+        $data = $request->json()->all();
         $message = Message::create([
             'user_id' => auth()->user()->id,
             'subject_id' => $data['subject_id'],
@@ -61,7 +61,7 @@ class MessageController extends ApiController
      */
     public function update(Request $request, Message $message)
     {
-        $data = parent::getData($request);
+        $data = $request->json()->all();
         $message->update([
             'subject_id' => $data['subject_id'],
             'body' => $data['body'],

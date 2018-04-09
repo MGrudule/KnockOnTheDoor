@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\User;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\UserProfileResource;
 use Illuminate\Http\Request;
 
-class UserProfileController extends ApiController
+class UserProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -55,7 +55,7 @@ class UserProfileController extends ApiController
      */
     public function update(Request $request, User $profile)
     {
-        $data = parent::getData($request);
+        $data = $request->json()->all();
 
         $update = [ 'name' => $data['name'] ];
         $errors = [];

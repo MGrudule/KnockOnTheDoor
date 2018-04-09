@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Circle;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\CircleResource;
 use Illuminate\Http\Request;
 
-class CircleController extends ApiController
+class CircleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class CircleController extends ApiController
      */
     public function store(Request $request)
     {
-        $data = parent::getData($request);
+        $data = $request->json()->all();
         return new CircleResource(Circle::create([
             'title' => $data['name'],
             'description' => $data['description'],
@@ -54,7 +54,7 @@ class CircleController extends ApiController
      */
     public function update(Request $request, Circle $circle)
     {
-        $data = parent::getData($request);
+        $data = $request->json()->all();
         $circle->update([
             'title' => $data['name'],
             'description' => $data['description'],

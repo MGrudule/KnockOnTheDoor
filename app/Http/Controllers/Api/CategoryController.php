@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Category;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
 
-class CategoryController extends ApiController
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class CategoryController extends ApiController
      */
     public function store(Request $request)
     {
-        $data = parent::getData($request);
+        $data = $request->json()->all();
         return new CategoryResource(Category::create([
             'name' => $data['name'],
             'color' => $data['color'],
@@ -54,7 +54,7 @@ class CategoryController extends ApiController
      */
     public function update(Request $request, Category $category)
     {
-        $data = parent::getData($request);
+        $data = $request->json()->all();
         $category->update([
             'name' => $data['name'],
             'color' => $data['color'],

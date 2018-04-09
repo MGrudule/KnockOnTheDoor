@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Comment;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
 use Illuminate\Http\Request;
 
-class CommentController extends ApiController
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class CommentController extends ApiController
      */
     public function store(Request $request)
     {
-        $data = parent::getData($request);
+        $data = $request->json()->all();
         $comment = Comment::create([
             'message_id' => $data['message_id'],
             'user_id' => auth()->user()->id,
@@ -63,7 +63,7 @@ class CommentController extends ApiController
      */
     public function update(Request $request, Comment $comment)
     {
-        $data = parent::getData($request);
+        $data = $request->json()->all();
         $comment->update([
             'comment' => $data['comment'],
         ]);
