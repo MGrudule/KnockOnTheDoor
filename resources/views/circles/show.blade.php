@@ -22,6 +22,10 @@
       <td><p>{{ $circle->description }}</p></td>
     </tr>
     <tr>
+      <th><label>Webpage</label></th>
+      <td><a href="{{ $circle->webpage }}" target="_blank">{{ $circle->webpage }}</a></td>
+    </tr>
+    <tr>
       <th><label>Created</label></th>
       <td>{{ $circle->created_at->format('d-m-Y h:m') }}</td>
     </tr>

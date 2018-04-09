@@ -25,6 +25,11 @@
           old('description', $circle->description)
       }}</textarea>
     </div>
+    <div class="form-group">
+      <label for="webpage">Webpage</label>
+      <input class="form-control" id="webpage" name="webpage"
+             value="{{ old('webpage', $circle->webpage) ?: $circle->webpage }}">
+    </div>
     <input class="btn" type="submit" value="Update">
     @cancelbtn Cancel @endcancelbtn
   </form>
