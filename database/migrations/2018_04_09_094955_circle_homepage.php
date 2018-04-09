@@ -14,7 +14,8 @@ class CircleHomepage extends Migration
     public function up()
     {
         Schema::table('circles', function (Blueprint $table) {
-            $table->text('webpage')->nullable()->after('description');
+            $table->string('webpage')->nullable()->after('description');
+            $table->string('image')->after('webpage')->nullable();
         });
     }
 
@@ -26,6 +27,7 @@ class CircleHomepage extends Migration
     public function down()
     {
         Schema::table('circles', function (Blueprint $table) {
+            $table->dropColumn('image');
             $table->dropColumn('webpage');
         });
     }

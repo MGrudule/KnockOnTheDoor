@@ -15,6 +15,7 @@
   <table class="table table-sm">
   <tr>
     <th>Title</th>
+    <th class="text-center">Logo</th>
     <th>Description</th>
     <th>Users</th>
     <th>Last Update</th>
@@ -29,11 +30,12 @@
           {{ $circle->title }}
         </a>
       </td>
+      <td class="text-center"><img src="{{ $circle->imagePublicUrl() }}" height='18px'></td>
       <td>{{ str_limit($circle->description, 42) }}</td>
       <td>{{ $circle->users->count() }}</td>
       <td>{{ $circle->updated_at->toFormattedDateString() }}</td>
       <td>
-        <a class="material-icons" style="font-size: 16px"
+        <a class="material-icons" style="font-size: 18px"
            href="{{ route('circles.edit', $circle->id) }}">edit</a>
       </td>
       <td>
@@ -44,7 +46,7 @@
           {{ csrf_field() }}
           {{ method_field('DELETE') }}
           <input class="material-icons" type="submit" value="delete"
-                 style="border:none; background:none; cursor:pointer; color:red; font-size: 16px">
+                 style="border:none; background:none; cursor:pointer; color:red; font-size: 18px">
         </form>
       </td>
     </tr>

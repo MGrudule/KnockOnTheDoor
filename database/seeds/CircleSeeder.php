@@ -12,9 +12,9 @@ class CircleSeeder extends Seeder
      */
     public function run()
     {
-        $amount = env('SEED_AMOUNT_CIRCLE') ?: 55;
-        echo $amount . " circles\n";
-        factory(Circle::class, env('SEED_AMOUNT_CIRCLE') ?: 55)->create();
+        $n = env('SEED_AMOUNT_CIRCLE') ?: 55;
+        echo $n . " circles\n";
+        factory(Circle::class, $n)->create();
     }
 
 }

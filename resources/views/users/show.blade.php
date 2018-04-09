@@ -37,6 +37,10 @@
       <td><p>{{ $user->summary }}</p></td>
     </tr>
     <tr>
+      <th><label>Image</label></th>
+      <td><img src="{{ $user->imagePublicUrl() }}" height='100px'></td>
+    </tr>
+    <tr>
       <th><label>Created</label></th>
       <td>{{ $user->created_at->format('d-m-Y h:m') }}</td>
     </tr>

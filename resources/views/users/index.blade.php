@@ -15,6 +15,7 @@
   <table class="table table-sm">
   <tr>
     <th>Name</th>
+    <th class="text-center">Image</th>
     <th>Email</th>
     <th>Circle</th>
     <th>Summary</th>
@@ -30,12 +31,13 @@
           {{ $user->name }}
         </a>
       </td>
+      <td class="text-center"><img src="{{ $user->imagePublicUrl() }}" height='18px'></td>
       <td>{{ $user->email }}</td>
       <td>{{ $user->circle->title }}</td>
       <td>{{ str_limit($user->summary, 42) }}</td>
       <td>{{ $user->updated_at->toFormattedDateString() }}</td>
       <td>
-        <a class="material-icons" style="font-size: 16px"
+        <a class="material-icons" style="font-size: 18px"
            href="{{ route('users.edit', $user->id) }}">edit</a>
       </td>
       <td>
@@ -46,7 +48,7 @@
           {{ csrf_field() }}
           {{ method_field('DELETE') }}
           <input class="material-icons" type="submit" value="delete"
-                 style="border:none; background:none; cursor:pointer; color:red; font-size: 16px">
+                 style="border:none; background:none; cursor:pointer; color:red; font-size: 18px">
         </form>
       </td>
     </tr>

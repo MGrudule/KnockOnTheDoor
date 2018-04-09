@@ -30,6 +30,12 @@
       <input class="form-control" id="webpage" name="webpage"
              value="{{ old('webpage', $circle->webpage) ?: $circle->webpage }}">
     </div>
+    <div class="form-group">
+      <label for="file">Image</label>
+      <img src="{{ $circle->imagePublicUrl() }}" height='100px'>
+      <input class="btn" class="form-control-file" type="file" name="file" id="file">
+      <input class="btn" type="submit" formaction="{{-- route('circles.update.image', $circle->id) --}}" value="Upload Image">
+    </div>
     <input class="btn" type="submit" value="Update">
     @cancelbtn Cancel @endcancelbtn
   </form>

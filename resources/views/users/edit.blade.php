@@ -40,8 +40,7 @@
     </div>
     <div class="form-group">
       <label for="file">Image</label>
-      <img src="{{ $user->imagePublicUrl() ?: '/storage/default.png' }}"
-           width='100px' height='100px'>
+      <img src="{{ $user->imagePublicUrl() }}" height="100px">
       <input class="btn" class="form-control-file" type="file" name="file" id="file">
       <input class="btn" type="submit" formaction="{{ route('users.update.image', $user->id) }}" value="Upload Image">
     </div>

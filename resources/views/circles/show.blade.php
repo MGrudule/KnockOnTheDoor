@@ -26,6 +26,10 @@
       <td><a href="{{ $circle->webpage }}" target="_blank">{{ $circle->webpage }}</a></td>
     </tr>
     <tr>
+      <th><label>Image</label></th>
+      <td><img src="{{ $circle->imagePublicUrl() }}" height='100px'></td>
+    </tr>
+    <tr>
       <th><label>Created</label></th>
       <td>{{ $circle->created_at->format('d-m-Y h:m') }}</td>
     </tr>

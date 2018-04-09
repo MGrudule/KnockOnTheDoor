@@ -16,6 +16,7 @@ return [
     'name' => env('APP_NAME', 'KnockOnTheDoor'),
     'web_name' => env('APP_NAME_WEB', 'KnockHQ'),
     'default_profile_image' => '/profile.png',
+    'default_circle_image' => '/circle.png',
 
     /*
     |--------------------------------------------------------------------------
