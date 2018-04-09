@@ -16,27 +16,20 @@ class UserResourceSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        echo env('SEED_AMOUNT_USER_RESOURCE_MIN') .
-            " to " .
-            env('SEED_AMOUNT_USER_RESOURCE_MAX') .
-            " resources per user\n";
+        $min = env('SEED_AMOUNT_USER_RESOURCE_MIN') ?: 3;
+        $max = env('SEED_AMOUNT_USER_RESOURCE_MAX') ?: 8;
+        echo $min  . " to " . $max . " resources per user\n";
 
         foreach (User::all() as $user) {
             foreach (UserResourceCategory::all() as $userResourceCategory) {
-                $this->addResources($faker, $user, $userResourceCategory);
+                $this->addResources($faker, $user, $userResourceCategory, $min, $max);
             }
         }
     }
 
-    private function addResources($faker, $user, $userResourceCategory)
+    private function addResources($faker, $user, $userResourceCategory, $min, $max)
     {
-        $n = $faker->biasedNumberBetween(
-            env('SEED_AMOUNT_USER_RESOURCE_MIN') ?: 3,
-            env('SEED_AMOUNT_USER_RESOURCE_MAX') ?: 8
-        );
-        $n = -$n +
-            (env('SEED_AMOUNT_USER_RESOURCE_MIN') ?: 3) +
-            (env('SEED_AMOUNT_USER_RESOURCE_MAX') ?: 8);
+        $n = -$faker->biasedNumberBetween($min, $max) + $min + $max;
 
         $resources = Resource::inRandomOrder()
             ->limit($n)

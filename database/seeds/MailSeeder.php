@@ -14,7 +14,7 @@ class MailSeeder extends Seeder
     {
         if (!env('SELECT_MAILS') || env('CREATE_WELCOME_MAIL')) {
             $title = 'Welcome';
-            echo "Seeding mail: " . $title . "\n";
+            echo $title . "\n";
             $viewName = 'mail.welcome';
             $view = app('view.finder')->find($viewName);
             Mail::create([
@@ -27,7 +27,7 @@ class MailSeeder extends Seeder
 
         if (!env('SELECT_MAILS') || env('CREATE_NEW_COMMENT_MAIL')) {
             $title = 'New Comment';
-            echo "Seeding mail: " . $title . "\n";
+            echo $title . "\n";
             $viewName = 'mail.new_comment';
             $view = app('view.finder')->find($viewName);
             Mail::create([
