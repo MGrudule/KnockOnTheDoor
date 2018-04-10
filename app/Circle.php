@@ -17,7 +17,7 @@ class Circle extends Model
 
     public function storeImage($file)
     {
-        $path = $file->store('public/circles');
+        $path = $file->store('public');
         $this->image = $path;
         $this->save();
         return back();

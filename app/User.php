@@ -117,7 +117,7 @@ class User extends Authenticatable
 
     public function storeImage($file)
     {
-        $path = $file->store('public/users');
+        $path = $file->store('public');
         $this->image = $path;
         $this->save();
         return back();
