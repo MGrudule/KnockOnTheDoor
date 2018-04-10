@@ -2,6 +2,10 @@ p {
     max-width: 600px;
 }
 
+input#color {
+    height: 40px;
+}
+
 .card {
     min-width: 600px;
 }
