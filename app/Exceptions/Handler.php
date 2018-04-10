@@ -53,6 +53,9 @@ class Handler extends ExceptionHandler
         if ($exception instanceof QueryException) {
             flash($exception->getMessage())->error();
             return back();
+        } else {
+            flash("An error occurred")->error();
+            return back();
         }
         return parent::render($request, $exception);
     }
