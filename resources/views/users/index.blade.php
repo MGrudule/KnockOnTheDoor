@@ -18,7 +18,7 @@
     <th class="text-center">Image</th>
     <th>Email</th>
     <th>Circle</th>
-    <th>Summary</th>
+    <!-- <th>Summary</th> -->
     <th>Last Update</th>
     <th>Edit</th>
     <th>Delete</th>
@@ -34,7 +34,7 @@
       <td class="text-center"><img src="{{ $user->imagePublicUrl() }}" height='18px'></td>
       <td>{{ $user->email }}</td>
       <td>{{ $user->circle->title }}</td>
-      <td>{{ str_limit($user->summary, 42) }}</td>
+      <!-- <td>{{ str_limit($user->summary, 42) }}</td> -->
       <td>{{ $user->updated_at->toFormattedDateString() }}</td>
       <td>
         <a class="material-icons" style="font-size: 18px"
