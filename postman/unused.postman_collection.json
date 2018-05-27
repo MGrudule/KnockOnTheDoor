@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "dcb778ec-2bc5-43e9-acd2-151061414fb2",
+		"name": "unused",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "98c7f881-b428-4eba-8beb-7f45f851eb43",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json().data;",
+							"",
+							"pm.test(\"Response has api_token\", function () {",
+							"    pm.expect(typeof jsonData.api_token !== undefined).to.be.true;",
+							"});",
+							"",
+							"pm.test(\"Set environment variable api_token\", function () {",
+							"    pm.environment.set(\"api_token\", jsonData.api_token);",
+							"    pm.expect(typeof pm.environment.get(\"api_token\") !== undefined).to.be.true;",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Accept",
+						"value": "text/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "{{username}}",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "652f05af-f6a9-4b39-a394-877480f5e0b4",
+					"name": "login as end-user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/api/login?email=t@e.st&password=secret",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "t@e.st"
+								},
+								{
+									"key": "password",
+									"value": "secret"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private",
+							"name": "Cache-Control",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "689",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Mar 2018 15:30:46 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100",
+							"name": "Keep-Alive",
+							"description": "Custom header"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.29 (Win32) OpenSSL/1.1.0g PHP/7.2.0",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Vary",
+							"value": "Authorization",
+							"name": "Vary",
+							"description": "Tells downstream proxies how to match future request headers to decide whether the cached response can be used rather than requesting a fresh one from the origin server."
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.2.0",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60",
+							"name": "X-RateLimit-Limit",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58",
+							"name": "X-RateLimit-Remaining",
+							"description": "Custom header"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Hudson Doyle\",\n        \"email\": \"end@user.ok\",\n        \"api_token\": \"1Evu96N0qSgh5pYPnVt0b7p4DqAbKaFdpyiHRZEW0Z92PkpF6ld3GQJvembe\",\n        \"circle_id\": 2,\n        \"summary\": \"Distinctio aliquid quidem non repellat magnam similique perferendis veritatis inventore non aut iure earum dolorem voluptatem quis qui fugiat quo qui laudantium similique ipsum consequatur et eos labore occaecati id minus est qui qui exercitationem autem quam et rerum sit sunt aut eligendi totam molestiae accusantium quo totam explicabo ut dicta asperiores aut molestiae exercitationem nihil voluptas impedit vel sapiente voluptatem qui amet est ut odio iure.\",\n        \"created_at\": \"2018-03-29 10:49:16\",\n        \"updated_at\": \"2018-03-30 15:30:47\"\n    }\n}"
+				}
+			]
+		}
+	]
+}
